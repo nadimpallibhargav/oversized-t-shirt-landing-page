@@ -145,6 +145,16 @@ export default function Page() {
               {/* Features */}
               <div className="grid grid-cols-2 gap-2 md:gap-4 py-3 md:py-4 border-t border-b border-stone-200 dark:border-stone-800">
                 <div>
+                  <p className="text-xs text-stone-500 dark:text-stone-500 mb-0.5">Color</p>
+                  <p className="text-xs md:text-sm font-medium dark:text-stone-200 text-stone-900">Black, White</p>
+                </div>
+                <div>
+                  <p className="text-xs text-stone-500 dark:text-stone-500 mb-0.5">Sizes</p>
+                  <p className="text-xs md:text-sm font-medium dark:text-stone-200 text-stone-900">
+                    XXS / XS / S / M / L / XL / XXL / 3XL
+                  </p>
+                </div>
+                <div>
                   <p className="text-xs text-stone-500 dark:text-stone-500 mb-0.5">Material</p>
                   <p className="text-xs md:text-sm font-medium dark:text-stone-200 text-stone-900">100% Cotton, 240 GSM</p>
                 </div>
