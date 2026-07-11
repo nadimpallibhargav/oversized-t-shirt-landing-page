@@ -88,7 +88,7 @@ export default function Page() {
         <p className="text-xs md:text-sm text-pretty">Currently Selling Oversized T-Shirts • <br className="md:hidden" />DM us—what are we missing?</p>
         <button
           onClick={toggleTheme}
-          className="p-1.5 rounded-lg hover:bg-stone-800 dark:hover:bg-stone-800 transition-colors flex-shrink-0 ml-auto"
+          className="p-1.5 rounded-lg hover:bg-stone-800 dark:hover:bg-stone-800 transition-colors shrink-0 ml-auto"
           aria-label="Toggle theme"
         >
           {isDark ? (
@@ -138,53 +138,21 @@ export default function Page() {
               {/* Price */}
               <div>
                 <p className="text-xs md:text-sm text-stone-600 dark:text-stone-400 mb-0.5">Starting from</p>
-                <p className="text-2xl md:text-4xl font-light dark:text-stone-50 text-stone-900">₹{sizePrice[selectedSize]}</p>
-                <p className="text-xs md:text-sm text-stone-500 dark:text-stone-500 mt-1">Size {selectedSize}</p>
-              </div>
-
-              {/* Color Selection */}
-              <div>
-                <p className="text-xs md:text-sm font-medium text-stone-700 dark:text-stone-300 mb-2">Colour</p>
-                <div className="flex gap-2 md:gap-3">
-                  {['black', 'white'].map((color) => (
-                    <button
-                      key={color}
-                      onClick={() => setSelectedColor(color as 'black' | 'white')}
-                      className={`w-14 h-14 md:w-16 md:h-16 rounded-lg border-2 transition-all ${
-                        selectedColor === color
-                          ? 'border-stone-900 dark:border-stone-50 scale-105 shadow-md'
-                          : 'border-stone-300 dark:border-stone-700 hover:border-stone-600 dark:hover:border-stone-500'
-                      } ${color === 'black' ? 'bg-black' : 'bg-white'}`}
-                      title={color.charAt(0).toUpperCase() + color.slice(1)}
-                    >
-                      <span className="sr-only">{color}</span>
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Size Selection */}
-              <div>
-                <p className="text-xs md:text-sm font-medium text-stone-700 dark:text-stone-300 mb-2">Size</p>
-                <div className="grid grid-cols-4 gap-1.5 md:gap-2">
-                  {sizes.map((size) => (
-                    <button
-                      key={size}
-                      onClick={() => setSelectedSize(size)}
-                      className={`py-1.5 md:py-2 px-2 md:px-3 border text-xs md:text-sm font-medium rounded-lg transition-all ${
-                        selectedSize === size
-                          ? 'bg-stone-900 dark:bg-stone-50 text-white dark:text-stone-950 border-stone-900 dark:border-stone-50'
-                          : 'border-stone-300 dark:border-stone-700 hover:border-stone-600 dark:hover:border-stone-500 dark:text-stone-300 text-stone-900'
-                      }`}
-                    >
-                      {size}
-                    </button>
-                  ))}
-                </div>
-              </div>
+                <p className="text-2xl md:text-4xl font-light dark:text-stone-50 text-stone-900">₹290</p>
+              </div>         
 
               {/* Features */}
               <div className="grid grid-cols-2 gap-2 md:gap-4 py-3 md:py-4 border-t border-b border-stone-200 dark:border-stone-800">
+                <div>
+                  <p className="text-xs text-stone-500 dark:text-stone-500 mb-0.5">Color</p>
+                  <p className="text-xs md:text-sm font-medium dark:text-stone-200 text-stone-900">Black, White</p>
+                </div>
+                <div>
+                  <p className="text-xs text-stone-500 dark:text-stone-500 mb-0.5">Sizes</p>
+                  <p className="text-xs md:text-sm font-medium dark:text-stone-200 text-stone-900">
+                    XXS / XS / S / M / L / XL / XXL / 3XL
+                  </p>
+                </div>
                 <div>
                   <p className="text-xs text-stone-500 dark:text-stone-500 mb-0.5">Material</p>
                   <p className="text-xs md:text-sm font-medium dark:text-stone-200 text-stone-900">100% Cotton, 240 GSM</p>
