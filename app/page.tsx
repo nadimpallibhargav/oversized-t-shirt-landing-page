@@ -88,7 +88,7 @@ export default function Page() {
         <p className="text-xs md:text-sm text-pretty">Currently Selling Oversized T-Shirts • <br className="md:hidden" />DM us—what are we missing?</p>
         <button
           onClick={toggleTheme}
-          className="p-1.5 rounded-lg hover:bg-stone-800 dark:hover:bg-stone-800 transition-colors flex-shrink-0 ml-auto"
+          className="p-1.5 rounded-lg hover:bg-stone-800 dark:hover:bg-stone-800 transition-colors shrink-0 ml-auto"
           aria-label="Toggle theme"
         >
           {isDark ? (
