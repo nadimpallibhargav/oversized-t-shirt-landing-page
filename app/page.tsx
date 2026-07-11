@@ -84,25 +84,25 @@ export default function Page() {
   return (
     <>
       {/* Banner */}
-      <div className="w-full bg-stone-900 dark:bg-stone-950 text-stone-50 py-3 px-4 text-center text-sm md:text-base sticky top-0 z-50 flex items-center justify-center gap-4">
-        <p className="text-pretty flex-1">Currently Selling Oversized T-Shirts • DM us—what are we missing? We&apos;re working on adding quality products and services for a better lifestyle.</p>
+      <div className="w-full bg-stone-900 dark:bg-stone-950 text-stone-50 py-2 px-3 sticky top-0 z-50 flex items-center justify-between gap-2 min-h-12">
+        <p className="text-xs md:text-sm text-pretty">Currently Selling Oversized T-Shirts • DM us—what are we missing?</p>
         <button
           onClick={toggleTheme}
-          className="p-2 rounded-lg hover:bg-stone-800 dark:hover:bg-stone-800 transition-colors flex-shrink-0"
+          className="p-1.5 rounded-lg hover:bg-stone-800 dark:hover:bg-stone-800 transition-colors flex-shrink-0 ml-auto"
           aria-label="Toggle theme"
         >
           {isDark ? (
-            <Sun className="w-5 h-5 text-stone-300" />
+            <Sun className="w-4 h-4 md:w-5 md:h-5 text-stone-300" />
           ) : (
-            <Moon className="w-5 h-5 text-stone-50" />
+            <Moon className="w-4 h-4 md:w-5 md:h-5 text-stone-50" />
           )}
         </button>
       </div>
 
       <main className="min-h-screen flex flex-col bg-stone-50 dark:bg-stone-950">
         {/* Hero Section */}
-        <section className="flex-1 px-4 py-8 md:py-16 max-w-6xl mx-auto w-full">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+        <section className="flex-1 px-3 md:px-4 py-6 md:py-16 max-w-6xl mx-auto w-full">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 items-start md:items-center">
             {/* Product Images */}
             <div className="flex flex-col gap-4">
               {/* Main Model Image */}
@@ -128,29 +128,29 @@ export default function Page() {
             </div>
 
             {/* Product Details */}
-            <div className="flex flex-col gap-6 md:gap-8">
+            <div className="flex flex-col gap-5 md:gap-8">
               {/* Title */}
               <div>
-                <h1 className="text-4xl md:text-5xl font-light mb-2 dark:text-stone-50">Oversized T-Shirt</h1>
-                <p className="text-stone-600 dark:text-stone-400 text-lg">Premium comfort, minimal design</p>
+                <h1 className="text-3xl md:text-5xl font-light mb-1 dark:text-stone-50 text-stone-900">Oversized T-Shirt</h1>
+                <p className="text-stone-600 dark:text-stone-400 text-base md:text-lg">Premium comfort, minimal design</p>
               </div>
 
               {/* Price */}
               <div>
-                <p className="text-sm text-stone-600 dark:text-stone-400 mb-1">Starting from</p>
-                <p className="text-3xl md:text-4xl font-light dark:text-stone-50">₹{sizePrice[selectedSize]}</p>
-                <p className="text-sm text-stone-500 dark:text-stone-500 mt-2">Size {selectedSize}</p>
+                <p className="text-xs md:text-sm text-stone-600 dark:text-stone-400 mb-0.5">Starting from</p>
+                <p className="text-2xl md:text-4xl font-light dark:text-stone-50 text-stone-900">₹{sizePrice[selectedSize]}</p>
+                <p className="text-xs md:text-sm text-stone-500 dark:text-stone-500 mt-1">Size {selectedSize}</p>
               </div>
 
               {/* Color Selection */}
               <div>
-                <p className="text-sm font-medium text-stone-700 dark:text-stone-300 mb-3">Colour</p>
-                <div className="flex gap-3">
+                <p className="text-xs md:text-sm font-medium text-stone-700 dark:text-stone-300 mb-2">Colour</p>
+                <div className="flex gap-2 md:gap-3">
                   {['black', 'white'].map((color) => (
                     <button
                       key={color}
                       onClick={() => setSelectedColor(color as 'black' | 'white')}
-                      className={`w-16 h-16 rounded-lg border-2 transition-all ${
+                      className={`w-14 h-14 md:w-16 md:h-16 rounded-lg border-2 transition-all ${
                         selectedColor === color
                           ? 'border-stone-900 dark:border-stone-50 scale-105 shadow-md'
                           : 'border-stone-300 dark:border-stone-700 hover:border-stone-600 dark:hover:border-stone-500'
@@ -165,16 +165,16 @@ export default function Page() {
 
               {/* Size Selection */}
               <div>
-                <p className="text-sm font-medium text-stone-700 dark:text-stone-300 mb-3">Size</p>
-                <div className="grid grid-cols-4 gap-2">
+                <p className="text-xs md:text-sm font-medium text-stone-700 dark:text-stone-300 mb-2">Size</p>
+                <div className="grid grid-cols-4 gap-1.5 md:gap-2">
                   {sizes.map((size) => (
                     <button
                       key={size}
                       onClick={() => setSelectedSize(size)}
-                      className={`py-2 px-3 border text-sm font-medium rounded-lg transition-all ${
+                      className={`py-1.5 md:py-2 px-2 md:px-3 border text-xs md:text-sm font-medium rounded-lg transition-all ${
                         selectedSize === size
                           ? 'bg-stone-900 dark:bg-stone-50 text-white dark:text-stone-950 border-stone-900 dark:border-stone-50'
-                          : 'border-stone-300 dark:border-stone-700 hover:border-stone-600 dark:hover:border-stone-500 dark:text-stone-300'
+                          : 'border-stone-300 dark:border-stone-700 hover:border-stone-600 dark:hover:border-stone-500 dark:text-stone-300 text-stone-900'
                       }`}
                     >
                       {size}
@@ -184,36 +184,36 @@ export default function Page() {
               </div>
 
               {/* Features */}
-              <div className="grid grid-cols-2 gap-4 py-4 border-t border-b border-stone-200 dark:border-stone-800">
+              <div className="grid grid-cols-2 gap-2 md:gap-4 py-3 md:py-4 border-t border-b border-stone-200 dark:border-stone-800">
                 <div>
-                  <p className="text-xs text-stone-500 dark:text-stone-500 mb-1">Material</p>
-                  <p className="text-sm font-medium dark:text-stone-200">100% Cotton, 240 GSM</p>
+                  <p className="text-xs text-stone-500 dark:text-stone-500 mb-0.5">Material</p>
+                  <p className="text-xs md:text-sm font-medium dark:text-stone-200 text-stone-900">100% Cotton, 240 GSM</p>
                 </div>
                 <div>
-                  <p className="text-xs text-stone-500 dark:text-stone-500 mb-1">Fit</p>
-                  <p className="text-sm font-medium dark:text-stone-200">Unisex Oversized</p>
+                  <p className="text-xs text-stone-500 dark:text-stone-500 mb-0.5">Fit</p>
+                  <p className="text-xs md:text-sm font-medium dark:text-stone-200 text-stone-900">Unisex Oversized</p>
                 </div>
                 <div>
-                  <p className="text-xs text-stone-500 dark:text-stone-500 mb-1">Delivery</p>
-                  <p className="text-sm font-medium dark:text-stone-200">2 days • COD Available</p>
+                  <p className="text-xs text-stone-500 dark:text-stone-500 mb-0.5">Delivery</p>
+                  <p className="text-xs md:text-sm font-medium dark:text-stone-200 text-stone-900">2 days • COD</p>
                 </div>
                 <div>
-                  <p className="text-xs text-stone-500 dark:text-stone-500 mb-1">Returns</p>
-                  <p className="text-sm font-medium dark:text-stone-200">7 days free exchange</p>
+                  <p className="text-xs text-stone-500 dark:text-stone-500 mb-0.5">Returns</p>
+                  <p className="text-xs md:text-sm font-medium dark:text-stone-200 text-stone-900">7 days exchange</p>
                 </div>
               </div>
 
               {/* CTA Button */}
               <button
                 onClick={handleWhatsAppClick}
-                className="w-full bg-stone-900 dark:bg-stone-50 text-white dark:text-stone-950 py-4 rounded-lg font-medium text-lg hover:bg-stone-800 dark:hover:bg-stone-200 transition-colors flex items-center justify-center gap-2 group"
+                className="w-full bg-stone-900 dark:bg-stone-50 text-white dark:text-stone-950 py-3 md:py-4 rounded-lg font-medium text-base md:text-lg hover:bg-stone-800 dark:hover:bg-stone-200 transition-colors flex items-center justify-center gap-2 group"
               >
-                <Smartphone className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                <Smartphone className="w-4 h-4 md:w-5 md:h-5 group-hover:scale-110 transition-transform" />
                 Buy on WhatsApp
               </button>
 
               {/* Additional Info */}
-              <div className="text-sm text-stone-600 dark:text-stone-400 space-y-2">
+              <div className="text-xs md:text-sm text-stone-600 dark:text-stone-400 space-y-1.5">
                 <p>✓ Bio-washed for extra softness</p>
                 <p>✓ Super Combed Ring-Spun Cotton</p>
                 <p>✓ Soft, breathable & durable</p>
@@ -223,27 +223,27 @@ export default function Page() {
         </section>
 
         {/* Footer */}
-        <footer className="bg-stone-900 dark:bg-stone-900 text-stone-50 dark:text-stone-50 py-8 px-4 border-t border-stone-800">
+        <footer className="bg-stone-900 dark:bg-stone-900 text-stone-50 dark:text-stone-50 py-6 md:py-8 px-3 md:px-4 border-t border-stone-800">
           <div className="max-w-6xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-6 md:mb-8">
               <div>
-                <h3 className="font-medium mb-2">Generic Square</h3>
-                <p className="text-stone-400 dark:text-stone-400 text-sm">Premium oversized apparel for everyday comfort.</p>
+                <h3 className="font-medium mb-2 text-sm">Generic Square</h3>
+                <p className="text-stone-400 dark:text-stone-400 text-xs md:text-sm">Premium oversized apparel for everyday comfort.</p>
               </div>
               <div>
-                <h3 className="font-medium mb-3">Contact</h3>
-                <div className="space-y-2 text-sm text-stone-400 dark:text-stone-400">
-                  <p>Phone: <a href="tel:+916301725336" className="hover:text-stone-50 dark:hover:text-stone-200 transition">+91 6301 725 336</a></p>
-                  <p>Email: <a href="mailto:genericsquare.info@gmail.com" className="hover:text-stone-50 dark:hover:text-stone-200 transition">genericsquare.info@gmail.com</a></p>
+                <h3 className="font-medium mb-2 text-sm">Contact</h3>
+                <div className="space-y-1 md:space-y-2 text-xs md:text-sm text-stone-400 dark:text-stone-400">
+                  <p>Phone: <a href="tel:+916301725336" className="hover:text-stone-50 dark:hover:text-stone-200 transition break-all">+91 6301 725 336</a></p>
+                  <p>Email: <a href="mailto:genericsquare.info@gmail.com" className="hover:text-stone-50 dark:hover:text-stone-200 transition break-all">genericsquare.info@gmail.com</a></p>
                 </div>
               </div>
               <div>
-                <h3 className="font-medium mb-3">Service Areas</h3>
-                <p className="text-sm text-stone-400 dark:text-stone-400 mb-1">Free delivery in HSR Layout</p>
-                <p className="text-sm text-stone-400 dark:text-stone-400">₹50 flat delivery across Bangalore</p>
+                <h3 className="font-medium mb-2 text-sm">Service Areas</h3>
+                <p className="text-xs md:text-sm text-stone-400 dark:text-stone-400 mb-1">Free delivery in HSR Layout</p>
+                <p className="text-xs md:text-sm text-stone-400 dark:text-stone-400">₹50 flat delivery across Bangalore</p>
               </div>
             </div>
-            <div className="border-t border-stone-800 dark:border-stone-700 pt-6 text-center text-sm text-stone-400 dark:text-stone-400">
+            <div className="border-t border-stone-800 dark:border-stone-700 pt-4 md:pt-6 text-center text-xs md:text-sm text-stone-400 dark:text-stone-400">
               <p>&copy; 2024 Generic Square. All rights reserved.</p>
             </div>
           </div>
