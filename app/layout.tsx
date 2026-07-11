@@ -4,7 +4,7 @@ import './globals.css'
 import { ThemeProvider } from './theme-provider'
 
 export const metadata: Metadata = {
-  title: 'Oversized T-Shirt | Generic Square',
+  title: 'Oversized T-Shirt',
   description: 'Premium oversized t-shirt in black and white. 100% cotton, 240 GSM, unisex fit with fast delivery across Bangalore.',
   generator: 'v0.app',
   icons: {
