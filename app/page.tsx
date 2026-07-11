@@ -138,8 +138,7 @@ export default function Page() {
               {/* Price */}
               <div>
                 <p className="text-xs md:text-sm text-stone-600 dark:text-stone-400 mb-0.5">Starting from</p>
-                <p className="text-2xl md:text-4xl font-light dark:text-stone-50 text-stone-900">₹{sizePrice[selectedSize]}</p>
-                <p className="text-xs md:text-sm text-stone-500 dark:text-stone-500 mt-1">Size {selectedSize}</p>
+                <p className="text-2xl md:text-4xl font-light dark:text-stone-50 text-stone-900">₹290</p>
               </div>         
 
               {/* Features */}
