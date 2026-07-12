@@ -5,8 +5,6 @@ import { Smartphone, Moon, Sun } from 'lucide-react';
 import Image from 'next/image';
 
 export default function Page() {
-  const [selectedColor, setSelectedColor] = useState<'black' | 'white'>('black');
-  const [selectedSize, setSelectedSize] = useState<string>('M');
   const [isDark, setIsDark] = useState(false);
   const [mounted, setMounted] = useState(false);
 
@@ -44,39 +42,8 @@ export default function Page() {
     }
   };
 
-  const sizePrice: Record<string, number> = {
-    'XXS': 290,
-    'XS': 290,
-    'S': 290,
-    'M': 310,
-    'L': 320,
-    'XL': 330,
-    'XXL': 350,
-    '3XL': 370,
-  };
-
-  const sizes = ['XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL', '3XL'];
-
-  const images = {
-    black: {
-      model: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/black-man-wu0LNWurRrU1ppm88HQJLV9q4NsZ4g.png',
-      hanger: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/black-top-ZhLCTI14lwP8qLdRvn8pWOxkpuId0w.jpeg',
-    },
-    white: {
-      model: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/white-man-mNmuwiHcuFRSiHOooHLrtEDhiPo2Ep.png',
-      hanger: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/white-top-nYvdSdeaDGizGdCXvwRCLJlLZ75uzX.jpeg',
-    },
-  };
-
   const handleWhatsAppClick = () => {
-    const message = `Hi! I'm interested in the Oversized T-Shirt in ${selectedColor.toUpperCase()} (Size: ${selectedSize}) for ₹${sizePrice[selectedSize]}`;
-    const whatsappUrl = `https://wa.me/p/27799765346315369/916301725336?text=${encodeURIComponent(message)}`;
-    
-    if (window.self !== window.top) {
-      window.open(whatsappUrl, '_blank');
-    } else {
-      window.location.href = whatsappUrl;
-    }
+    window.location.href = 'https://wa.me/p/27799765346315369/916301725336';
   };
 
   if (!mounted) return null;
@@ -108,8 +75,8 @@ export default function Page() {
               {/* Main Model Image */}
               <div className="relative w-full aspect-square bg-stone-100 dark:bg-stone-900 rounded-lg overflow-hidden">
                 <Image
-                  src={images[selectedColor].model}
-                  alt={`${selectedColor} oversized t-shirt on model`}
+                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/black-man-wu0LNWurRrU1ppm88HQJLV9q4NsZ4g.png"
+                  alt="Black oversized t-shirt on model"
                   fill
                   className="object-cover"
                   priority
@@ -119,8 +86,8 @@ export default function Page() {
               {/* Hanger Detail Image */}
               <div className="relative w-full aspect-square bg-stone-100 dark:bg-stone-900 rounded-lg overflow-hidden">
                 <Image
-                  src={images[selectedColor].hanger}
-                  alt={`${selectedColor} oversized t-shirt on hanger`}
+                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/black-top-ZhLCTI14lwP8qLdRvn8pWOxkpuId0w.jpeg"
+                  alt="Black oversized t-shirt on hanger"
                   fill
                   className="object-cover"
                 />
@@ -195,19 +162,21 @@ export default function Page() {
               </div>
             </div>
           </div>
+        </section>
 
-          {/* Size Chart Section */}
-          <section className="px-3 md:px-4 py-8 md:py-12 max-w-6xl mx-auto w-full">
-            <h2 className="text-2xl md:text-3xl font-light mb-6 dark:text-stone-50 text-stone-900">Size Chart</h2>
-            <div className="relative w-full aspect-video md:aspect-auto rounded-lg overflow-hidden bg-stone-100 dark:bg-stone-900">
-              <Image
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/sizechart-H1Co13W896AqtTntOjtxCBuV66cKSv.png"
-                alt="Oversized T-Shirt Size Chart - Measurements for all sizes"
-                fill
-                className="object-contain"
-              />
-            </div>
-          </section>
+        {/* Size Chart Section */}
+        <section className="px-3 md:px-4 py-8 md:py-12 max-w-6xl mx-auto w-full">
+          <h2 className="text-2xl md:text-3xl font-light mb-6 dark:text-stone-50 text-stone-900">Size Chart</h2>
+          <div className="relative w-full rounded-lg overflow-hidden bg-stone-100 dark:bg-stone-900">
+            <Image
+              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/sizechart-H1Co13W896AqtTntOjtxCBuV66cKSv.png"
+              alt="Oversized T-Shirt Size Chart - Measurements for all sizes"
+              width={1280}
+              height={800}
+              className="w-full h-auto object-contain"
+              priority
+            />
+          </div>
         </section>
 
         {/* Footer */}
