@@ -83,11 +83,11 @@ export default function Page() {
                 />
               </div>
               
-              {/* Hanger Detail Image */}
+              {/* Lifestyle Image */}
               <div className="relative w-full aspect-square bg-stone-100 dark:bg-stone-900 rounded-lg overflow-hidden">
                 <Image
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/black-top-ZhLCTI14lwP8qLdRvn8pWOxkpuId0w.jpeg"
-                  alt="Black oversized t-shirt on hanger"
+                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/black-kvwNk3o0GijDLKwvLp0ehj3HdZuYxl.png"
+                  alt="Black oversized t-shirt styled with white pants and sneakers"
                   fill
                   className="object-cover"
                 />
