@@ -75,8 +75,8 @@ export default function Page() {
               {/* Main Model Image */}
               <div className="relative w-full aspect-square bg-stone-100 dark:bg-stone-900 rounded-lg overflow-hidden">
                 <Image
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/black-man-wu0LNWurRrU1ppm88HQJLV9q4NsZ4g.png"
-                  alt="Black oversized t-shirt on model"
+                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/me-white-qgfc6Uc5qSKorgoOO6ZjIm8IR2yEb4.png"
+                  alt="White oversized t-shirt on model"
                   fill
                   className="object-cover"
                   priority
@@ -117,7 +117,7 @@ export default function Page() {
                 <div>
                   <p className="text-xs text-stone-500 dark:text-stone-500 mb-0.5">Sizes</p>
                   <p className="text-xs md:text-sm font-medium dark:text-stone-200 text-stone-900">
-                    XXS / XS / S / M / L / XL / XXL / 3XL
+                    S / M / L / XL / XXL / 3XL
                   </p>
                 </div>
                 <div>
@@ -130,7 +130,7 @@ export default function Page() {
                 </div>
                 <div>
                   <p className="text-xs text-stone-500 dark:text-stone-500 mb-0.5">Delivery</p>
-                  <p className="text-xs md:text-sm font-medium dark:text-stone-200 text-stone-900">2 days • COD</p>
+                  <p className="text-xs md:text-sm font-medium dark:text-stone-200 text-stone-900">3 days • COD</p>
                 </div>
                 <div>
                   <p className="text-xs text-stone-500 dark:text-stone-500 mb-0.5">Returns</p>
