@@ -75,19 +75,19 @@ export default function Page() {
               {/* Main Model Image */}
               <div className="relative w-full aspect-square bg-stone-100 dark:bg-stone-900 rounded-lg overflow-hidden">
                 <Image
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/black-man-wu0LNWurRrU1ppm88HQJLV9q4NsZ4g.png"
-                  alt="Black oversized t-shirt on model"
+                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/me-white-qgfc6Uc5qSKorgoOO6ZjIm8IR2yEb4.png"
+                  alt="White oversized t-shirt on model"
                   fill
                   className="object-cover"
                   priority
                 />
               </div>
               
-              {/* Hanger Detail Image */}
+              {/* Lifestyle Image */}
               <div className="relative w-full aspect-square bg-stone-100 dark:bg-stone-900 rounded-lg overflow-hidden">
                 <Image
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/black-top-ZhLCTI14lwP8qLdRvn8pWOxkpuId0w.jpeg"
-                  alt="Black oversized t-shirt on hanger"
+                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/black-kvwNk3o0GijDLKwvLp0ehj3HdZuYxl.png"
+                  alt="Black oversized t-shirt styled with white pants and sneakers"
                   fill
                   className="object-cover"
                 />
@@ -98,44 +98,87 @@ export default function Page() {
             <div className="flex flex-col gap-5 md:gap-8">
               {/* Title */}
               <div>
-                <h1 className="text-3xl md:text-5xl font-light mb-1 dark:text-stone-50 text-stone-900">Oversized T-Shirt</h1>
-                <p className="text-stone-600 dark:text-stone-400 text-base md:text-lg">Premium comfort, minimal design</p>
+                <h1 className="text-3xl md:text-5xl font-light mb-1 dark:text-stone-50 text-stone-900">240 GSM Premium Oversized T-Shirt</h1>
+                <p className="text-stone-600 dark:text-stone-400 text-base md:text-lg">Premium comfort. Minimal design.</p>
               </div>
 
-              {/* Price */}
-              <div>
-                <p className="text-xs md:text-sm text-stone-600 dark:text-stone-400 mb-0.5">Starting from</p>
-                <p className="text-2xl md:text-4xl font-light dark:text-stone-50 text-stone-900">₹290</p>
-              </div>         
+              {/* Pricing */}
+              <div className="space-y-2">
+                <div>
+                  <p className="text-xs text-stone-500 dark:text-stone-500 mb-1">Pricing</p>
+                  <div className="space-y-1">
+                    <p className="text-xs md:text-sm font-medium dark:text-stone-200 text-stone-900">S, M, L — <span className="text-lg md:text-2xl">₹300</span></p>
+                    <p className="text-xs md:text-sm font-medium dark:text-stone-200 text-stone-900">XL, XXL, 3XL — <span className="text-lg md:text-2xl">₹350</span></p>
+                    <p className="text-xs text-stone-500 dark:text-stone-500">XXS & XS coming soon</p>
+                  </div>
+                </div>
+              </div>
 
-              {/* Features */}
-              <div className="grid grid-cols-2 gap-2 md:gap-4 py-3 md:py-4 border-t border-b border-stone-200 dark:border-stone-800">
-                <div>
-                  <p className="text-xs text-stone-500 dark:text-stone-500 mb-0.5">Color</p>
-                  <p className="text-xs md:text-sm font-medium dark:text-stone-200 text-stone-900">Black, White</p>
-                </div>
-                <div>
-                  <p className="text-xs text-stone-500 dark:text-stone-500 mb-0.5">Sizes</p>
-                  <p className="text-xs md:text-sm font-medium dark:text-stone-200 text-stone-900">
-                    XXS / XS / S / M / L / XL / XXL / 3XL
-                  </p>
-                </div>
-                <div>
-                  <p className="text-xs text-stone-500 dark:text-stone-500 mb-0.5">Material</p>
-                  <p className="text-xs md:text-sm font-medium dark:text-stone-200 text-stone-900">100% Cotton, 240 GSM</p>
-                </div>
-                <div>
-                  <p className="text-xs text-stone-500 dark:text-stone-500 mb-0.5">Fit</p>
-                  <p className="text-xs md:text-sm font-medium dark:text-stone-200 text-stone-900">Unisex Oversized</p>
-                </div>
-                <div>
-                  <p className="text-xs text-stone-500 dark:text-stone-500 mb-0.5">Delivery</p>
-                  <p className="text-xs md:text-sm font-medium dark:text-stone-200 text-stone-900">2 days • COD</p>
-                </div>
-                <div>
-                  <p className="text-xs text-stone-500 dark:text-stone-500 mb-0.5">Returns</p>
-                  <p className="text-xs md:text-sm font-medium dark:text-stone-200 text-stone-900">7 days return & exchange</p>
-                </div>
+              {/* Fabric Details */}
+              <div>
+                <p className="text-xs text-stone-500 dark:text-stone-500 mb-2">Fabric</p>
+                <ul className="text-xs md:text-sm text-stone-700 dark:text-stone-300 space-y-1">
+                  <li className="flex gap-2">
+                    <span>•</span>
+                    <span>100% Cotton</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <span>•</span>
+                    <span>240 GSM Premium French Terry</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <span>•</span>
+                    <span>Bio-washed</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <span>•</span>
+                    <span>Super Combed Ring-Spun Cotton</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <span>•</span>
+                    <span>Soft, breathable & durable</span>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Delivery */}
+              <div>
+                <p className="text-xs text-stone-500 dark:text-stone-500 mb-2">Delivery</p>
+                <ul className="text-xs md:text-sm text-stone-700 dark:text-stone-300 space-y-1">
+                  <li className="flex gap-2">
+                    <span>•</span>
+                    <span>Delivered within 3 days</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <span>•</span>
+                    <span>Flat ₹50 delivery across Bangalore</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <span>•</span>
+                    <span>Cash on Delivery available</span>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Returns */}
+              <div>
+                <p className="text-xs text-stone-500 dark:text-stone-500 mb-2">Returns</p>
+                <p className="text-xs md:text-sm text-stone-700 dark:text-stone-300 mb-2">Eligible within 7 days if:</p>
+                <ul className="text-xs md:text-sm text-stone-700 dark:text-stone-300 space-y-1">
+                  <li className="flex gap-2">
+                    <span>•</span>
+                    <span>Damaged product</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <span>•</span>
+                    <span>Wrong item received</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <span>•</span>
+                    <span>Item is unused, unwashed & in original condition</span>
+                  </li>
+                </ul>
+                <p className="text-xs text-stone-600 dark:text-stone-400 mt-2">Refunds are processed instantly once the return is received.</p>
               </div>
 
               {/* CTA Button */}
@@ -146,13 +189,6 @@ export default function Page() {
                 <Smartphone className="w-4 h-4 md:w-5 md:h-5 group-hover:scale-110 transition-transform" />
                 Buy on WhatsApp
               </button>
-
-              {/* Additional Info */}
-              <div className="text-xs md:text-sm text-stone-600 dark:text-stone-400 space-y-1.5">
-                <p>✓ Bio-washed for extra softness</p>
-                <p>✓ Super Combed Ring-Spun Cotton</p>
-                <p>✓ Soft, breathable & durable</p>
-              </div>
 
               {/* Size Chart Warning */}
               <div className="bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-800 rounded-lg p-3 md:p-4">
