@@ -5,7 +5,7 @@ import { ThemeProvider } from './theme-provider'
 
 export const metadata: Metadata = {
   title: 'Oversized T-Shirt',
-  description: 'Premium oversized t-shirt in black and white. 100% cotton, 240 GSM, unisex fit with fast delivery across Bangalore.',
+  description: 'Premium oversized and custom printed t-shirts in black and white. 100% cotton, 240 GSM, inclusive Bangalore delivery.',
   generator: 'v0.app',
   icons: {
     icon: [
