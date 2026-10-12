@@ -166,7 +166,7 @@ export default function Page() {
                   </li>
                   <li className="flex gap-2">
                     <span>•</span>
-                    <span>Flat ₹50 delivery across Bangalore; price is inclusive of delivery charges</span>
+                    <span>price is inclusive of delivery charges across bangalore</span>
                   </li>
                   <li className="flex gap-2">
                     <span>•</span>
