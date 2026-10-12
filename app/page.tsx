@@ -107,11 +107,26 @@ export default function Page() {
                 <div>
                   <p className="text-xs text-stone-500 dark:text-stone-500 mb-1">Pricing</p>
                   <div className="space-y-1">
-                    <p className="text-xs md:text-sm font-medium dark:text-stone-200 text-stone-900">S, M, L — <span className="text-lg md:text-2xl">₹300</span></p>
-                    <p className="text-xs md:text-sm font-medium dark:text-stone-200 text-stone-900">XL, XXL, 3XL — <span className="text-lg md:text-2xl">₹350</span></p>
-                    <p className="text-xs text-stone-500 dark:text-stone-500">XXS & XS coming soon</p>
+                    <p className="text-xs md:text-sm font-medium dark:text-stone-200 text-stone-900">XXS – 3XL — <span className="text-lg md:text-2xl">₹300</span></p>
+                    <p className="text-xs md:text-sm font-medium dark:text-stone-200 text-stone-900">Custom printed — <span className="text-lg md:text-2xl">₹350</span></p>
+                    <p className="text-xs text-stone-500 dark:text-stone-500">All prices are inclusive of delivery charges.</p>
                   </div>
                 </div>
+              </div>
+
+              {/* Colors */}
+              <div>
+                <p className="text-xs text-stone-500 dark:text-stone-500 mb-2">Colors available</p>
+                <div className="flex gap-2">
+                  <span className="inline-flex items-center gap-2 rounded-full border border-stone-300 dark:border-stone-700 px-3 py-1.5 text-xs text-stone-700 dark:text-stone-300"><span className="size-3 rounded-full bg-stone-950 border border-stone-400" aria-hidden="true" />Black</span>
+                  <span className="inline-flex items-center gap-2 rounded-full border border-stone-300 dark:border-stone-700 px-3 py-1.5 text-xs text-stone-700 dark:text-stone-300"><span className="size-3 rounded-full bg-white border border-stone-400" aria-hidden="true" />White</span>
+                </div>
+              </div>
+
+              {/* Sizes */}
+              <div>
+                <p className="text-xs text-stone-500 dark:text-stone-500 mb-2">Sizes available</p>
+                <p className="text-xs md:text-sm text-stone-700 dark:text-stone-300">XXS, XS, S, M, L, XL, XXL and 3XL</p>
               </div>
 
               {/* Fabric Details */}
@@ -151,7 +166,7 @@ export default function Page() {
                   </li>
                   <li className="flex gap-2">
                     <span>•</span>
-                    <span>Flat ₹50 delivery across Bangalore</span>
+                    <span>Price is inclusive of delivery charges across bangalore</span>
                   </li>
                   <li className="flex gap-2">
                     <span>•</span>
@@ -198,6 +213,22 @@ export default function Page() {
               </div>
             </div>
           </div>
+        </section>
+
+        {/* Custom Printed T-Shirts Section */}
+        <section className="px-3 md:px-4 py-8 md:py-12 max-w-6xl mx-auto w-full">
+          <div className="flex flex-col gap-2 mb-6">
+            <p className="text-xs uppercase tracking-[0.2em] text-stone-500 dark:text-stone-500">Make it yours</p>
+            <h2 className="text-2xl md:text-3xl font-light dark:text-stone-50 text-stone-900">Custom Printed T-Shirts</h2>
+            <p className="text-sm md:text-base text-stone-600 dark:text-stone-400 max-w-2xl">Choose a design from our collection or share your own. Custom printed t-shirts are ₹350, with delivery charges already included.</p>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+            <div className="relative aspect-[4/5] rounded-lg overflow-hidden bg-stone-100 dark:bg-stone-900"><Image src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/balance-jky6yf2imDKm8CEDNH6etlgETNg5YE.jpg" alt="White custom printed Balance t-shirt" fill className="object-cover" /></div>
+            <div className="relative aspect-[4/5] rounded-lg overflow-hidden bg-stone-100 dark:bg-stone-900"><Image src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/everest-base-camp-zkg6UlhflXVMROvwzYHjV0Qhz8bxyc.jpg" alt="Navy custom printed Everest Base Camp t-shirt" fill className="object-cover" /></div>
+            <div className="relative aspect-[4/5] rounded-lg overflow-hidden bg-stone-100 dark:bg-stone-900"><Image src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/matrix-KMkpnv8PJZKyBfsvSvUKEpMgwHnUfw.jpg" alt="White custom printed Matrix t-shirt" fill className="object-cover" /></div>
+            <div className="relative aspect-[4/5] rounded-lg overflow-hidden bg-stone-100 dark:bg-stone-900"><Image src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/custom-print-N3HkgXFQBRwSN3zd9Yfo2zJKv1thzl.jpg" alt="Black t-shirt with a custom design preview" fill className="object-cover" /></div>
+          </div>
+          <button onClick={handleWhatsAppClick} className="mt-6 w-full md:w-auto bg-stone-900 dark:bg-stone-50 text-white dark:text-stone-950 px-6 py-3 rounded-lg font-medium hover:bg-stone-800 dark:hover:bg-stone-200 transition-colors">Order a custom print — ₹350</button>
         </section>
 
         {/* Size Chart Section */}
