@@ -43,19 +43,21 @@ export function ProductCard({ name, price, image, alt, colorOptions = ['Black', 
               {sizes.map((option) => <option key={option} value={option}>{option}</option>)}
             </select>
           </div>
-          <div>
-            <p className="mb-1.5 text-stone-500">Color</p>
-            <div className="flex flex-wrap gap-1.5">
-              {colorOptions.map((option) => <button key={option} type="button" onClick={() => setColor(option)} aria-pressed={color === option} className={`rounded-full border px-3 py-1 transition ${color === option ? 'border-stone-900 bg-stone-900 text-white dark:border-stone-50 dark:bg-stone-50 dark:text-stone-950' : 'border-stone-200 text-stone-600 hover:border-stone-500 dark:border-stone-700 dark:text-stone-300'}`}>{option}</button>)}
+          <div className="flex items-end justify-between gap-3">
+            <div className="min-w-0">
+              <p className="mb-1.5 text-stone-500">Color</p>
+              <div className="flex flex-wrap gap-1.5">
+                {colorOptions.map((option) => <button key={option} type="button" onClick={() => setColor(option)} aria-pressed={color === option} className={`rounded-full border px-3 py-1 transition ${color === option ? 'border-stone-900 bg-stone-900 text-white dark:border-stone-50 dark:bg-stone-50 dark:text-stone-950' : 'border-stone-200 text-stone-600 hover:border-stone-500 dark:border-stone-700 dark:text-stone-300'}`}>{option}</button>)}
+              </div>
             </div>
-          </div>
-          <div className="flex items-center justify-between">
-            <span className="text-stone-500">Quantity</span>
+            <div className="flex shrink-0 items-center gap-2">
+              <span className="text-stone-500">Quantity</span>
             <div className="flex items-center rounded-md border border-stone-200 dark:border-stone-700">
               <button type="button" onClick={() => setQuantity(Math.max(1, quantity - 1))} className="p-2 text-stone-600 hover:text-stone-950 dark:text-stone-300 dark:hover:text-white" aria-label="Decrease quantity"><Minus className="size-3.5" /></button>
               <span className="min-w-7 text-center font-medium text-stone-900 dark:text-stone-50">{quantity}</span>
               <button type="button" onClick={() => setQuantity(Math.min(10, quantity + 1))} className="p-2 text-stone-600 hover:text-stone-950 dark:text-stone-300 dark:hover:text-white" aria-label="Increase quantity"><Plus className="size-3.5" /></button>
             </div>
+          </div>
           </div>
         </div>
         <button type="button" onClick={buyOnWhatsApp} className="mt-auto flex w-full items-center justify-center gap-2 rounded-lg bg-stone-900 px-3 py-2.5 text-sm font-medium text-white transition hover:bg-stone-700 dark:bg-stone-50 dark:text-stone-950 dark:hover:bg-stone-200"><Smartphone className="size-4" />Buy now</button>

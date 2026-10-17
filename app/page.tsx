@@ -11,10 +11,10 @@ const products = [
 ]
 
 const customPrints = [
-  { name: 'Aerial Silhouette Print', image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/spiderman-rQFmdkkCgX6RAu4xhdGH8GrHlfReAx.jpg', alt: 'Black t-shirt with a white aerial silhouette design' },
-  { name: 'Balance Print', image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/balance-jky6yf2imDKm8CEDNH6etlgETNg5YE.jpg', alt: 'White custom printed Balance t-shirt' },
+  { name: 'Spiderman Save Gwen', image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/spiderman-rQFmdkkCgX6RAu4xhdGH8GrHlfReAx.jpg', alt: 'Black t-shirt with a Spiderman Save Gwen design' },
+  { name: 'Zen Balancing Stones', image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/balance-jky6yf2imDKm8CEDNH6etlgETNg5YE.jpg', alt: 'White t-shirt with a zen balancing stones design' },
   { name: 'Everest Base Camp Print', image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/everest-base-camp-zkg6UlhflXVMROvwzYHjV0Qhz8bxyc.jpg', alt: 'Navy custom printed Everest Base Camp t-shirt' },
-  { name: 'Matrix Print', image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/matrix-KMkpnv8PJZKyBfsvSvUKEpMgwHnUfw.jpg', alt: 'White custom printed Matrix t-shirt' },
+  { name: 'Matrix Logo', image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/matrix-KMkpnv8PJZKyBfsvSvUKEpMgwHnUfw.jpg', alt: 'White t-shirt with a Matrix logo design' },
   { name: 'Your Own Design', image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/custom-print-N3HkgXFQBRwSN3zd9Yfo2zJKv1thzl.jpg', alt: 'Black t-shirt with a custom design preview' },
 ]
 
@@ -44,14 +44,18 @@ export default function Page() {
       </div>
 
       <main className="min-h-screen bg-stone-50 dark:bg-stone-950">
-        <section className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-3 py-10 md:px-4 md:py-16">
-          <div className="max-w-2xl">
-            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-stone-500">240 GSM · Premium French Terry</p>
-            <h1 className="text-4xl font-light tracking-tight text-stone-950 dark:text-stone-50 md:text-6xl">Oversized, made personal.</h1>
-            <p className="mt-4 max-w-xl text-base leading-7 text-stone-600 dark:text-stone-400">Heavyweight cotton tees in clean solids and custom prints. Pick your fit, color, quantity, then send the order straight to WhatsApp.</p>
-          </div>
-          <div className="grid gap-5 md:grid-cols-2">
-            {products.map((product) => <ProductCard key={product.name} {...product} />)}
+        <section className="mx-auto w-full max-w-6xl px-3 py-6 md:px-4 md:py-16">
+          <div className="grid items-start gap-6 md:grid-cols-2 md:items-center md:gap-12">
+            <div className="flex flex-col gap-4">
+              {products.map((product, index) => <div key={product.name} className="relative aspect-square overflow-hidden rounded-lg bg-stone-100 dark:bg-stone-900"><Image src={product.image} alt={product.alt} fill priority={index === 0} className="object-cover" /></div>)}
+            </div>
+            <div className="flex flex-col gap-5 md:gap-8">
+              <div><h1 className="mb-1 text-3xl font-light text-stone-900 dark:text-stone-50 md:text-5xl">240 GSM Premium Oversized T-Shirt</h1><p className="text-base text-stone-600 dark:text-stone-400 md:text-lg">Premium comfort. Minimal design.</p></div>
+              <div><p className="mb-1 text-xs text-stone-500">Pricing</p><p className="text-sm font-medium text-stone-900 dark:text-stone-200">XXS – 3XL — <span className="text-lg md:text-2xl">₹300</span></p><p className="text-sm font-medium text-stone-900 dark:text-stone-200">Custom printed — <span className="text-lg md:text-2xl">₹350</span></p><p className="mt-1 text-xs text-stone-500">All prices are inclusive of delivery charges.</p></div>
+              <div><p className="mb-2 text-xs text-stone-500">Colors available</p><div className="flex gap-2"><span className="inline-flex items-center gap-2 rounded-full border border-stone-300 px-3 py-1.5 text-xs text-stone-700 dark:border-stone-700 dark:text-stone-300"><span className="size-3 rounded-full border border-stone-400 bg-stone-950" />Black</span><span className="inline-flex items-center gap-2 rounded-full border border-stone-300 px-3 py-1.5 text-xs text-stone-700 dark:border-stone-700 dark:text-stone-300"><span className="size-3 rounded-full border border-stone-400 bg-white" />White</span></div></div>
+              <div><p className="mb-2 text-xs text-stone-500">Sizes available</p><p className="text-sm text-stone-700 dark:text-stone-300">XXS, XS, S, M, L, XL, XXL and 3XL</p></div>
+              <div><p className="mb-2 text-xs text-stone-500">Fabric</p><ul className="flex flex-col gap-1 text-sm text-stone-700 dark:text-stone-300"><li>• 100% Cotton</li><li>• 240 GSM Premium French Terry</li><li>• Oversized fit</li></ul></div>
+            </div>
           </div>
         </section>
 
