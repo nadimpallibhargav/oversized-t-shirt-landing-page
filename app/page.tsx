@@ -1,269 +1,80 @@
-'use client';
+'use client'
 
-import { useState, useEffect } from 'react';
-import { Smartphone, Moon, Sun } from 'lucide-react';
-import Image from 'next/image';
+import { useEffect, useState } from 'react'
+import Image from 'next/image'
+import { Moon, Sun } from 'lucide-react'
+import { ProductCard } from '@/components/product-card'
+
+const products = [
+  { name: 'Premium Oversized Tee · Solid', price: 300, image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/me-white-qgfc6Uc5qSKorgoOO6ZjIm8IR2yEb4.png', alt: 'White oversized t-shirt on model' },
+  { name: 'Premium Oversized Tee · Black', price: 300, image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/black-kvwNk3o0GijDLKwvLp0ehj3HdZuYxl.png', alt: 'Black oversized t-shirt styled with white pants and sneakers' },
+]
+
+const customPrints = [
+  { name: 'Aerial Silhouette Print', image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/spiderman-rQFmdkkCgX6RAu4xhdGH8GrHlfReAx.jpg', alt: 'Black t-shirt with a white aerial silhouette design' },
+  { name: 'Balance Print', image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/balance-jky6yf2imDKm8CEDNH6etlgETNg5YE.jpg', alt: 'White custom printed Balance t-shirt' },
+  { name: 'Everest Base Camp Print', image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/everest-base-camp-zkg6UlhflXVMROvwzYHjV0Qhz8bxyc.jpg', alt: 'Navy custom printed Everest Base Camp t-shirt' },
+  { name: 'Matrix Print', image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/matrix-KMkpnv8PJZKyBfsvSvUKEpMgwHnUfw.jpg', alt: 'White custom printed Matrix t-shirt' },
+  { name: 'Your Own Design', image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/custom-print-N3HkgXFQBRwSN3zd9Yfo2zJKv1thzl.jpg', alt: 'Black t-shirt with a custom design preview' },
+]
 
 export default function Page() {
-  const [isDark, setIsDark] = useState(false);
-  const [mounted, setMounted] = useState(false);
+  const [isDark, setIsDark] = useState(false)
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    setMounted(true);
-    const isDarkMode = document.documentElement.classList.contains('dark');
-    setIsDark(isDarkMode);
-
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    const handleChange = (e: MediaQueryListEvent) => {
-      setIsDark(e.matches);
-      if (e.matches) {
-        document.documentElement.classList.add('dark');
-        localStorage.setItem('theme', 'dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-        localStorage.setItem('theme', 'light');
-      }
-    };
-
-    mediaQuery.addEventListener('change', handleChange);
-    return () => mediaQuery.removeEventListener('change', handleChange);
-  }, []);
+    setMounted(true)
+    setIsDark(document.documentElement.classList.contains('dark'))
+  }, [])
 
   const toggleTheme = () => {
-    const newIsDark = !isDark;
-    setIsDark(newIsDark);
-    
-    if (newIsDark) {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-    }
-  };
+    const next = !isDark
+    setIsDark(next)
+    document.documentElement.classList.toggle('dark', next)
+    window.localStorage.setItem('theme', next ? 'dark' : 'light')
+  }
 
-  const handleWhatsAppClick = () => {
-    window.location.href = 'https://wa.me/p/27799765346315369/916301725336';
-  };
-
-  if (!mounted) return null;
+  if (!mounted) return null
 
   return (
     <>
-      {/* Banner */}
-      <div className="w-full bg-stone-900 dark:bg-stone-950 text-stone-50 py-2 px-3 sticky top-0 z-50 flex items-center justify-between gap-2 min-h-12">
-        <p className="text-xs md:text-sm text-pretty">Currently Selling Oversized T-Shirts • <br className="md:hidden" />DM us—what are we missing?</p>
-        <button
-          onClick={toggleTheme}
-          className="p-1.5 rounded-lg hover:bg-stone-800 dark:hover:bg-stone-800 transition-colors shrink-0 ml-auto"
-          aria-label="Toggle theme"
-        >
-          {isDark ? (
-            <Sun className="w-4 h-4 md:w-5 md:h-5 text-stone-300" />
-          ) : (
-            <Moon className="w-4 h-4 md:w-5 md:h-5 text-stone-50" />
-          )}
-        </button>
+      <div className="sticky top-0 z-50 flex min-h-12 items-center justify-between gap-2 bg-stone-900 px-3 py-2 text-stone-50">
+        <p className="text-xs md:text-sm">Currently selling oversized t-shirts <span className="text-stone-400">· DM us what we&apos;re missing</span></p>
+        <button onClick={toggleTheme} className="rounded-lg p-1.5 transition hover:bg-stone-800" aria-label="Toggle theme">{isDark ? <Sun className="size-5 text-stone-300" /> : <Moon className="size-5" />}</button>
       </div>
 
-      <main className="min-h-screen flex flex-col bg-stone-50 dark:bg-stone-950">
-        {/* Hero Section */}
-        <section className="flex-1 px-3 md:px-4 py-6 md:py-16 max-w-6xl mx-auto w-full">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 items-start md:items-center">
-            {/* Product Images */}
-            <div className="flex flex-col gap-4">
-              {/* Main Model Image */}
-              <div className="relative w-full aspect-square bg-stone-100 dark:bg-stone-900 rounded-lg overflow-hidden">
-                <Image
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/me-white-qgfc6Uc5qSKorgoOO6ZjIm8IR2yEb4.png"
-                  alt="White oversized t-shirt on model"
-                  fill
-                  className="object-cover"
-                  priority
-                />
-              </div>
-              
-              {/* Lifestyle Image */}
-              <div className="relative w-full aspect-square bg-stone-100 dark:bg-stone-900 rounded-lg overflow-hidden">
-                <Image
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/black-kvwNk3o0GijDLKwvLp0ehj3HdZuYxl.png"
-                  alt="Black oversized t-shirt styled with white pants and sneakers"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-            </div>
-
-            {/* Product Details */}
-            <div className="flex flex-col gap-5 md:gap-8">
-              {/* Title */}
-              <div>
-                <h1 className="text-3xl md:text-5xl font-light mb-1 dark:text-stone-50 text-stone-900">240 GSM Premium Oversized T-Shirt</h1>
-                <p className="text-stone-600 dark:text-stone-400 text-base md:text-lg">Premium comfort. Minimal design.</p>
-              </div>
-
-              {/* Pricing */}
-              <div className="space-y-2">
-                <div>
-                  <p className="text-xs text-stone-500 dark:text-stone-500 mb-1">Pricing</p>
-                  <div className="space-y-1">
-                    <p className="text-xs md:text-sm font-medium dark:text-stone-200 text-stone-900">XXS – 3XL — <span className="text-lg md:text-2xl">₹300</span></p>
-                    <p className="text-xs md:text-sm font-medium dark:text-stone-200 text-stone-900">Custom printed — <span className="text-lg md:text-2xl">₹350</span></p>
-                    <p className="text-xs text-stone-500 dark:text-stone-500">All prices are inclusive of delivery charges.</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Colors */}
-              <div>
-                <p className="text-xs text-stone-500 dark:text-stone-500 mb-2">Colors available</p>
-                <div className="flex gap-2">
-                  <span className="inline-flex items-center gap-2 rounded-full border border-stone-300 dark:border-stone-700 px-3 py-1.5 text-xs text-stone-700 dark:text-stone-300"><span className="size-3 rounded-full bg-stone-950 border border-stone-400" aria-hidden="true" />Black</span>
-                  <span className="inline-flex items-center gap-2 rounded-full border border-stone-300 dark:border-stone-700 px-3 py-1.5 text-xs text-stone-700 dark:text-stone-300"><span className="size-3 rounded-full bg-white border border-stone-400" aria-hidden="true" />White</span>
-                </div>
-              </div>
-
-              {/* Sizes */}
-              <div>
-                <p className="text-xs text-stone-500 dark:text-stone-500 mb-2">Sizes available</p>
-                <p className="text-xs md:text-sm text-stone-700 dark:text-stone-300">XXS, XS, S, M, L, XL, XXL and 3XL</p>
-              </div>
-
-              {/* Fabric Details */}
-              <div>
-                <p className="text-xs text-stone-500 dark:text-stone-500 mb-2">Fabric</p>
-                <ul className="text-xs md:text-sm text-stone-700 dark:text-stone-300 space-y-1">
-                  <li className="flex gap-2">
-                    <span>•</span>
-                    <span>100% Cotton</span>
-                  </li>
-                  <li className="flex gap-2">
-                    <span>•</span>
-                    <span>240 GSM Premium French Terry</span>
-                  </li>
-                  <li className="flex gap-2">
-                    <span>•</span>
-                    <span>Bio-washed</span>
-                  </li>
-                  <li className="flex gap-2">
-                    <span>•</span>
-                    <span>Super Combed Ring-Spun Cotton</span>
-                  </li>
-                  <li className="flex gap-2">
-                    <span>•</span>
-                    <span>Soft, breathable & durable</span>
-                  </li>
-                </ul>
-              </div>
-
-              {/* Delivery */}
-              <div>
-                <p className="text-xs text-stone-500 dark:text-stone-500 mb-2">Delivery</p>
-                <ul className="text-xs md:text-sm text-stone-700 dark:text-stone-300 space-y-1">
-                  <li className="flex gap-2">
-                    <span>•</span>
-                    <span>Delivered within 3 days</span>
-                  </li>
-                  <li className="flex gap-2">
-                    <span>•</span>
-                    <span>Price is inclusive of delivery charges across bangalore</span>
-                  </li>
-                  <li className="flex gap-2">
-                    <span>•</span>
-                    <span>Cash on Delivery available</span>
-                  </li>
-                </ul>
-              </div>
-
-              {/* Returns */}
-              <div>
-                <p className="text-xs text-stone-500 dark:text-stone-500 mb-2">Returns</p>
-                <p className="text-xs md:text-sm text-stone-700 dark:text-stone-300 mb-2">Eligible within 7 days if:</p>
-                <ul className="text-xs md:text-sm text-stone-700 dark:text-stone-300 space-y-1">
-                  <li className="flex gap-2">
-                    <span>•</span>
-                    <span>Damaged product</span>
-                  </li>
-                  <li className="flex gap-2">
-                    <span>•</span>
-                    <span>Wrong item received</span>
-                  </li>
-                  <li className="flex gap-2">
-                    <span>•</span>
-                    <span>Item is unused, unwashed & in original condition</span>
-                  </li>
-                </ul>
-                <p className="text-xs text-stone-600 dark:text-stone-400 mt-2">Refunds are processed instantly once the return is received.</p>
-              </div>
-
-              {/* CTA Button */}
-              <button
-                onClick={handleWhatsAppClick}
-                className="w-full bg-stone-900 dark:bg-stone-50 text-white dark:text-stone-950 py-3 md:py-4 rounded-lg font-medium text-base md:text-lg hover:bg-stone-800 dark:hover:bg-stone-200 transition-colors flex items-center justify-center gap-2 group"
-              >
-                <Smartphone className="w-4 h-4 md:w-5 md:h-5 group-hover:scale-110 transition-transform" />
-                Buy on WhatsApp
-              </button>
-
-              {/* Size Chart Warning */}
-              <div className="bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-800 rounded-lg p-3 md:p-4">
-                <p className="text-xs md:text-sm text-blue-900 dark:text-blue-100">
-                  <span className="font-medium">Please check the size chart before ordering.</span> Our oversized fit is designed to match the sizing of luxury streetwear brands.
-                </p>
-              </div>
-            </div>
+      <main className="min-h-screen bg-stone-50 dark:bg-stone-950">
+        <section className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-3 py-10 md:px-4 md:py-16">
+          <div className="max-w-2xl">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-stone-500">240 GSM · Premium French Terry</p>
+            <h1 className="text-4xl font-light tracking-tight text-stone-950 dark:text-stone-50 md:text-6xl">Oversized, made personal.</h1>
+            <p className="mt-4 max-w-xl text-base leading-7 text-stone-600 dark:text-stone-400">Heavyweight cotton tees in clean solids and custom prints. Pick your fit, color, quantity, then send the order straight to WhatsApp.</p>
+          </div>
+          <div className="grid gap-5 md:grid-cols-2">
+            {products.map((product) => <ProductCard key={product.name} {...product} />)}
           </div>
         </section>
 
-        {/* Custom Printed T-Shirts Section */}
-        <section className="px-3 md:px-4 py-8 md:py-12 max-w-6xl mx-auto w-full">
-          <div className="flex flex-col gap-2 mb-6">
-            <p className="text-xs uppercase tracking-[0.2em] text-stone-500 dark:text-stone-500">Make it yours</p>
-            <h2 className="text-2xl md:text-3xl font-light dark:text-stone-50 text-stone-900">Custom Printed T-Shirts</h2>
-            <p className="text-sm md:text-base text-stone-600 dark:text-stone-400 max-w-2xl">Choose a design from our collection or share your own. Custom printed t-shirts are ₹350, with delivery charges already included.</p>
+        <section className="mx-auto w-full max-w-6xl px-3 py-10 md:px-4 md:py-16">
+          <div className="mb-7 max-w-2xl">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-stone-500">Make it yours</p>
+            <h2 className="text-3xl font-light tracking-tight text-stone-950 dark:text-stone-50 md:text-4xl">Custom printed collection</h2>
+            <p className="mt-3 text-sm leading-6 text-stone-600 dark:text-stone-400">Choose one of our prints or use the design preview to start a custom order. Every card includes size, color, quantity, and Buy now controls.</p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-            <div className="relative aspect-[4/5] rounded-lg overflow-hidden bg-stone-100 dark:bg-stone-900"><Image src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/balance-jky6yf2imDKm8CEDNH6etlgETNg5YE.jpg" alt="White custom printed Balance t-shirt" fill className="object-cover" /></div>
-            <div className="relative aspect-[4/5] rounded-lg overflow-hidden bg-stone-100 dark:bg-stone-900"><Image src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/everest-base-camp-zkg6UlhflXVMROvwzYHjV0Qhz8bxyc.jpg" alt="Navy custom printed Everest Base Camp t-shirt" fill className="object-cover" /></div>
-            <div className="relative aspect-[4/5] rounded-lg overflow-hidden bg-stone-100 dark:bg-stone-900"><Image src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/matrix-KMkpnv8PJZKyBfsvSvUKEpMgwHnUfw.jpg" alt="White custom printed Matrix t-shirt" fill className="object-cover" /></div>
-            <div className="relative aspect-[4/5] rounded-lg overflow-hidden bg-stone-100 dark:bg-stone-900"><Image src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/custom-print-N3HkgXFQBRwSN3zd9Yfo2zJKv1thzl.jpg" alt="Black t-shirt with a custom design preview" fill className="object-cover" /></div>
-          </div>
-          <button onClick={handleWhatsAppClick} className="mt-6 w-full md:w-auto bg-stone-900 dark:bg-stone-50 text-white dark:text-stone-950 px-6 py-3 rounded-lg font-medium hover:bg-stone-800 dark:hover:bg-stone-200 transition-colors">Order a custom print — ₹350</button>
-        </section>
-
-        {/* Size Chart Section */}
-        <section className="px-3 md:px-4 py-8 md:py-12 max-w-6xl mx-auto w-full">
-          <h2 className="text-2xl md:text-3xl font-light mb-6 dark:text-stone-50 text-stone-900">Size Chart</h2>
-          <div className="relative w-full rounded-lg overflow-hidden bg-stone-100 dark:bg-stone-900">
-            <Image
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/sizechart-H1Co13W896AqtTntOjtxCBuV66cKSv.png"
-              alt="Oversized T-Shirt Size Chart - Measurements for all sizes"
-              width={1280}
-              height={800}
-              className="w-full h-auto object-contain"
-              priority
-            />
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {customPrints.map((product) => <ProductCard key={product.name} {...product} price={350} custom colorOptions={['Black', 'White', 'Navy']} />)}
           </div>
         </section>
 
-        {/* Footer */}
-        <footer className="bg-stone-900 dark:bg-stone-900 text-stone-50 dark:text-stone-50 py-6 md:py-8 px-3 md:px-4 border-t border-stone-800">
-          <div className="max-w-6xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-              <div>
-                <p className="text-stone-400 dark:text-stone-400 text-xs md:text-sm">Premium oversized apparel for everyday comfort.</p>
-              </div>
-              <div>
-                <h3 className="font-medium mb-2 text-sm">Contact</h3>
-                <div className="space-y-1 md:space-y-2 text-xs md:text-sm text-stone-400 dark:text-stone-400">
-                  <p>WhatsApp: <a href="https://wa.me/916301725336" className="hover:text-stone-50 dark:hover:text-stone-200 transition break-all">+91 6301 725 336</a></p>
-                  <p>Email: <a href="mailto:genericsquare.info@gmail.com" className="hover:text-stone-50 dark:hover:text-stone-200 transition break-all">genericsquare.info@gmail.com</a></p>
-                </div>
-              </div>
-            </div>
-          </div>
+        <section className="mx-auto w-full max-w-6xl px-3 py-10 md:px-4 md:py-16">
+          <h2 className="mb-6 text-3xl font-light tracking-tight text-stone-950 dark:text-stone-50">Size chart</h2>
+          <div className="overflow-hidden rounded-2xl bg-stone-100 dark:bg-stone-900"><Image src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/sizechart-H1Co13W896AqtTntOjtxCBuV66cKSv.png" alt="Oversized t-shirt size chart with measurements" width={1280} height={800} className="h-auto w-full object-contain" /></div>
+        </section>
+
+        <footer className="border-t border-stone-800 bg-stone-900 px-3 py-8 text-stone-50 md:px-4">
+          <div className="mx-auto flex w-full max-w-6xl flex-col gap-2 text-sm"><p className="text-stone-300">Premium oversized apparel for everyday comfort.</p><p className="text-stone-400">WhatsApp: <a href="https://wa.me/916301725336" className="text-stone-100 underline underline-offset-4">+91 6301 725 336</a> · Email: genericsquare.info@gmail.com</p></div>
         </footer>
       </main>
     </>
-  );
+  )
 }
