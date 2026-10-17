@@ -23,8 +23,12 @@ export default function Page() {
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    const savedTheme = window.localStorage.getItem('theme')
+    const shouldUseDark = savedTheme === 'dark'
+    document.documentElement.classList.toggle('dark', shouldUseDark)
+    document.documentElement.classList.toggle('light', !shouldUseDark)
+    setIsDark(shouldUseDark)
     setMounted(true)
-    setIsDark(document.documentElement.classList.contains('dark'))
   }, [])
 
   const toggleTheme = () => {
@@ -63,7 +67,7 @@ export default function Page() {
           <div className="mb-7 max-w-2xl">
             <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-stone-500">Make it yours</p>
             <h2 className="text-3xl font-light tracking-tight text-stone-950 dark:text-stone-50 md:text-4xl">Custom printed collection</h2>
-            <p className="mt-3 text-sm leading-6 text-stone-600 dark:text-stone-400">Choose one of our prints or use the design preview to start a custom order.</p>
+            <p className="mt-3 text-sm leading-6 text-stone-600 dark:text-stone-400">Choose one of our designs or your own custom design.</p>
           </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {customPrints.map((product) => <ProductCard key={product.name} {...product} price={350} custom colorOptions={['Black', 'White']} />)}
