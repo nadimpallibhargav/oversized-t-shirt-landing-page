@@ -59,10 +59,10 @@ export default function Page() {
           <div className="mb-7 max-w-2xl">
             <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-stone-500">Make it yours</p>
             <h2 className="text-3xl font-light tracking-tight text-stone-950 dark:text-stone-50 md:text-4xl">Custom printed collection</h2>
-            <p className="mt-3 text-sm leading-6 text-stone-600 dark:text-stone-400">Choose one of our prints or use the design preview to start a custom order. Every card includes size, color, quantity, and Buy now controls.</p>
+            <p className="mt-3 text-sm leading-6 text-stone-600 dark:text-stone-400">Choose one of our prints or use the design preview to start a custom order.</p>
           </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {customPrints.map((product) => <ProductCard key={product.name} {...product} price={350} custom colorOptions={['Black', 'White', 'Navy']} />)}
+            {customPrints.map((product) => <ProductCard key={product.name} {...product} price={350} custom colorOptions={['Black', 'White']} />)}
           </div>
         </section>
 

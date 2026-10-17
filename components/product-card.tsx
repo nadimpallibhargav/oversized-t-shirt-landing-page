@@ -39,9 +39,9 @@ export function ProductCard({ name, price, image, alt, colorOptions = ['Black', 
         <div className="flex flex-col gap-3 text-xs">
           <div>
             <p className="mb-1.5 text-stone-500">Size</p>
-            <div className="flex flex-wrap gap-1.5">
-              {sizes.map((option) => <button key={option} type="button" onClick={() => setSize(option)} aria-pressed={size === option} className={`rounded-md border px-2 py-1 transition ${size === option ? 'border-stone-900 bg-stone-900 text-white dark:border-stone-50 dark:bg-stone-50 dark:text-stone-950' : 'border-stone-200 text-stone-600 hover:border-stone-500 dark:border-stone-700 dark:text-stone-300'}`}>{option}</button>)}
-            </div>
+            <select value={size} onChange={(event) => setSize(event.target.value)} aria-label="Choose size" className="w-full rounded-md border border-stone-200 bg-white px-3 py-2 text-stone-900 outline-none transition focus:border-stone-500 dark:border-stone-700 dark:bg-stone-950 dark:text-stone-50">
+              {sizes.map((option) => <option key={option} value={option}>{option}</option>)}
+            </select>
           </div>
           <div>
             <p className="mb-1.5 text-stone-500">Color</p>
