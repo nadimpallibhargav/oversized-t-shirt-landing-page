@@ -70,7 +70,7 @@ export default function Page() {
             <p className="mt-3 text-sm leading-6 text-stone-600 dark:text-stone-400">Choose one of our designs or your own custom design.</p>
           </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {customPrints.map((product) => <ProductCard key={product.name} {...product} price={350} custom colorOptions={['Black', 'White']} />)}
+            {customPrints.map((product) => <ProductCard key={product.name} {...product} price={350} custom={product.name === 'Your Own Design'} colorOptions={['Black', 'White']} />)}
           </div>
         </section>
 

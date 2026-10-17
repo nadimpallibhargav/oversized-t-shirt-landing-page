@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { Minus, Plus, Smartphone } from 'lucide-react'
-import { useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 
 type ProductCardProps = {
   name: string
@@ -19,9 +19,32 @@ export function ProductCard({ name, price, image, alt, colorOptions = ['Black', 
   const [size, setSize] = useState('M')
   const [color, setColor] = useState(colorOptions[0])
   const [quantity, setQuantity] = useState(1)
+  const [uploadedDesignUrl, setUploadedDesignUrl] = useState('')
+  const [uploading, setUploading] = useState(false)
+  const [uploadError, setUploadError] = useState('')
+
+  const uploadDesign = async (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+    if (!file) return
+    setUploading(true)
+    setUploadError('')
+    const formData = new FormData()
+    formData.append('file', file)
+    try {
+      const response = await fetch('/api/upload', { method: 'POST', body: formData })
+      const result = await response.json()
+      if (!response.ok) throw new Error(result.error)
+      setUploadedDesignUrl(result.url)
+    } catch (error) {
+      setUploadError(error instanceof Error ? error.message : 'Upload failed.')
+    } finally {
+      setUploading(false)
+    }
+  }
 
   const buyOnWhatsApp = () => {
-    const details = `Hi! I want to order ${quantity} x ${name} (${size}, ${color}) for ₹${price * quantity}. ${custom ? `Design reference: ${image}` : ''}`
+    const designDetails = custom && uploadedDesignUrl ? ` Custom design image: ${uploadedDesignUrl}` : ''
+    const details = `Hi! I want to order ${quantity} x ${name} (${size}, ${color}) for ₹${price * quantity}.${designDetails}`
     window.open(`https://wa.me/916301725336?text=${encodeURIComponent(details)}`, '_blank', 'noopener,noreferrer')
   }
 
@@ -49,8 +72,8 @@ export function ProductCard({ name, price, image, alt, colorOptions = ['Black', 
               {colorOptions.map((option) => <option key={option} value={option}>{option}</option>)}
             </select>
           </div>
-          <div className="flex shrink-0 items-center gap-2">
-            <span className="text-stone-500">Qty</span>
+          <div>
+            <p className="mb-1.5 text-stone-500">Qty</p>
             <div className="flex items-center rounded-md border border-stone-200 dark:border-stone-700">
               <button type="button" onClick={() => setQuantity(Math.max(1, quantity - 1))} className="p-2 text-stone-600 hover:text-stone-950 dark:text-stone-300 dark:hover:text-white" aria-label="Decrease quantity"><Minus className="size-3.5" /></button>
               <span className="min-w-7 text-center font-medium text-stone-900 dark:text-stone-50">{quantity}</span>
@@ -58,7 +81,14 @@ export function ProductCard({ name, price, image, alt, colorOptions = ['Black', 
             </div>
           </div>
         </div>
-        <button type="button" onClick={buyOnWhatsApp} className="mt-auto flex w-full items-center justify-center gap-2 rounded-lg bg-stone-900 px-3 py-2.5 text-sm font-medium text-white transition hover:bg-stone-700 dark:bg-stone-50 dark:text-stone-950 dark:hover:bg-stone-200"><Smartphone className="size-4" />Buy now</button>
+        {custom && <div className="flex flex-col gap-1.5 text-xs">
+          <label htmlFor={`design-${name}`} className="text-stone-500">Your custom design</label>
+          <input id={`design-${name}`} type="file" accept="image/jpeg,image/png,image/webp" onChange={uploadDesign} className="w-full rounded-md border border-dashed border-stone-300 bg-stone-50 px-2 py-2 text-stone-600 file:mr-2 file:rounded file:border-0 file:bg-stone-900 file:px-2 file:py-1 file:text-xs file:text-white dark:border-stone-700 dark:bg-stone-950 dark:text-stone-300 dark:file:bg-stone-50 dark:file:text-stone-950" />
+          {uploading && <p className="text-stone-500">Uploading design...</p>}
+          {uploadedDesignUrl && <p className="text-green-700 dark:text-green-400">Design uploaded and ready to send.</p>}
+          {uploadError && <p className="text-red-700 dark:text-red-400">{uploadError}</p>}
+        </div>}
+        <button type="button" onClick={buyOnWhatsApp} disabled={uploading} className="mt-auto flex w-full items-center justify-center gap-2 rounded-lg bg-stone-900 px-3 py-2.5 text-sm font-medium text-white transition hover:bg-stone-700 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-stone-50 dark:text-stone-950 dark:hover:bg-stone-200"><Smartphone className="size-4" />Buy now</button>
       </div>
     </article>
   )
