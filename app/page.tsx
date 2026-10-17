@@ -10,12 +10,13 @@ const products = [
   { name: 'Premium Oversized Tee · Black', price: 300, image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/black-kvwNk3o0GijDLKwvLp0ehj3HdZuYxl.png', alt: 'Black oversized t-shirt styled with white pants and sneakers' },
 ]
 
-const customPrints = [
+const customDesign = { name: 'Your Own Design', image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/custom-print-N3HkgXFQBRwSN3zd9Yfo2zJKv1thzl.jpg', alt: 'Black t-shirt with a custom design preview' }
+
+const designOptions = [
   { name: 'Spiderman Save Gwen', image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/spiderman-rQFmdkkCgX6RAu4xhdGH8GrHlfReAx.jpg', alt: 'Black t-shirt with a Spiderman Save Gwen design' },
   { name: 'Zen Balancing Stones', image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/balance-jky6yf2imDKm8CEDNH6etlgETNg5YE.jpg', alt: 'White t-shirt with a zen balancing stones design' },
-  { name: 'Everest Base Camp Print', image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/everest-base-camp-zkg6UlhflXVMROvwzYHjV0Qhz8bxyc.jpg', alt: 'Navy custom printed Everest Base Camp t-shirt' },
+  { name: 'Everest Base Camp', image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/everest-base-camp-zkg6UlhflXVMROvwzYHjV0Qhz8bxyc.jpg', alt: 'Navy t-shirt with an Everest Base Camp design' },
   { name: 'Matrix Logo', image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/matrix-KMkpnv8PJZKyBfsvSvUKEpMgwHnUfw.jpg', alt: 'White t-shirt with a Matrix logo design' },
-  { name: 'Your Own Design', image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/custom-print-N3HkgXFQBRwSN3zd9Yfo2zJKv1thzl.jpg', alt: 'Black t-shirt with a custom design preview' },
 ]
 
 export default function Page() {
@@ -58,7 +59,11 @@ export default function Page() {
               <div><p className="mb-1 text-xs text-stone-500">Pricing</p><p className="text-sm font-medium text-stone-900 dark:text-stone-200">XXS – 3XL — <span className="text-lg md:text-2xl">₹300</span></p><p className="text-sm font-medium text-stone-900 dark:text-stone-200">Custom printed — <span className="text-lg md:text-2xl">₹350</span></p><p className="mt-1 text-xs text-stone-500">All prices are inclusive of delivery charges.</p></div>
               <div><p className="mb-2 text-xs text-stone-500">Colors available</p><div className="flex gap-2"><span className="inline-flex items-center gap-2 rounded-full border border-stone-300 px-3 py-1.5 text-xs text-stone-700 dark:border-stone-700 dark:text-stone-300"><span className="size-3 rounded-full border border-stone-400 bg-stone-950" />Black</span><span className="inline-flex items-center gap-2 rounded-full border border-stone-300 px-3 py-1.5 text-xs text-stone-700 dark:border-stone-700 dark:text-stone-300"><span className="size-3 rounded-full border border-stone-400 bg-white" />White</span></div></div>
               <div><p className="mb-2 text-xs text-stone-500">Sizes available</p><p className="text-sm text-stone-700 dark:text-stone-300">XXS, XS, S, M, L, XL, XXL and 3XL</p></div>
-              <div><p className="mb-2 text-xs text-stone-500">Fabric</p><ul className="flex flex-col gap-1 text-sm text-stone-700 dark:text-stone-300"><li>• 100% Cotton</li><li>• 240 GSM Premium French Terry</li><li>• Oversized fit</li></ul></div>
+              <div><p className="mb-2 text-xs text-stone-500">Fabric</p><ul className="flex flex-col gap-1 text-sm text-stone-700 dark:text-stone-300"><li>• 100% Cotton</li><li>• 240 GSM Premium French Terry</li><li>• Bio-washed</li><li>• Super Combed Ring-Spun Cotton</li><li>• Soft, breathable &amp; durable</li></ul></div>
+              <div><p className="mb-2 text-xs text-stone-500">Delivery</p><ul className="flex flex-col gap-1 text-sm text-stone-700 dark:text-stone-300"><li>• Delivered within 3 days</li><li>• Delivery included across Bangalore</li><li>• Cash on Delivery available</li></ul></div>
+              <div><p className="mb-2 text-xs text-stone-500">Returns</p><p className="text-sm text-stone-700 dark:text-stone-300">7-day returns for damaged, incorrect, or unused and unwashed items. Refunds are processed once the return is received.</p></div>
+              <p className="text-xs text-stone-500">Please check the size chart before ordering. Our oversized fit is designed to match luxury streetwear sizing.</p>
+              <a href="https://wa.me/916301725336?text=Hi!%20I%20want%20to%20order%20a%20240%20GSM%20Premium%20Oversized%20T-Shirt" target="_blank" rel="noreferrer" className="inline-flex w-fit rounded-lg bg-stone-900 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-stone-700 dark:bg-stone-50 dark:text-stone-950 dark:hover:bg-stone-200">Buy on WhatsApp</a>
             </div>
           </div>
         </section>
@@ -66,11 +71,18 @@ export default function Page() {
         <section className="mx-auto w-full max-w-6xl px-3 py-10 md:px-4 md:py-16">
           <div className="mb-7 max-w-2xl">
             <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-stone-500">Make it yours</p>
-            <h2 className="text-3xl font-light tracking-tight text-stone-950 dark:text-stone-50 md:text-4xl">Custom printed collection</h2>
+            <h2 className="text-3xl font-light tracking-tight text-stone-950 dark:text-stone-50 md:text-4xl">Design your oversized tee</h2>
             <p className="mt-3 text-sm leading-6 text-stone-600 dark:text-stone-400">Choose one of our designs or your own custom design.</p>
           </div>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {customPrints.map((product) => <ProductCard key={product.name} {...product} price={350} custom={product.name === 'Your Own Design'} colorOptions={['Black', 'White']} />)}
+          <div className="flex flex-col gap-8">
+            <div>
+              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-stone-500">Custom design</p>
+              <div className="max-w-sm"><ProductCard {...customDesign} price={350} custom colorOptions={['Black', 'White']} placementOptions={['Front center', 'Back center', 'Left chest', 'Right chest']} /></div>
+            </div>
+            <div>
+              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-stone-500">Choose a design</p>
+              <div className="max-w-sm"><ProductCard {...designOptions[0]} price={350} designOptions={designOptions} colorOptions={['Black', 'White']} /></div>
+            </div>
           </div>
         </section>
 
