@@ -5,9 +5,13 @@ import Image from 'next/image'
 import { Moon, Sun } from 'lucide-react'
 import { ProductCard } from '@/components/product-card'
 
-const products = [
-  { name: 'Premium Oversized Tee · Solid', price: 300, image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/me-white-qgfc6Uc5qSKorgoOO6ZjIm8IR2yEb4.png', alt: 'White oversized t-shirt on model' },
-  { name: 'Premium Oversized Tee · Black', price: 300, image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/black-kvwNk3o0GijDLKwvLp0ehj3HdZuYxl.png', alt: 'Black oversized t-shirt styled with white pants and sneakers' },
+const productGallery = [
+  { image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/white-SAU35CCXE1SPLVniic3kIZpcjdYPZB.jpeg', alt: 'White oversized t-shirt on a dark textile background' },
+  { image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/black-xVIgfOuZTkLD5lbOV8Vc1VqwFUJyL8.jpeg', alt: 'Black oversized t-shirt on a grey textile background' },
+  { image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/white-closeup.png-wZMnwRnloFrFtUuVUG1mX6OIE1F6zN.jpeg', alt: 'Close-up of white t-shirt stitching and fabric' },
+  { image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/black-xVIgfOuZTkLD5lbOV8Vc1VqwFUJyL8.jpeg', alt: 'Close-up view of black t-shirt fabric' },
+  { image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/black-closeup-inside-JWjbHXpElIAVP6LNHHMJi7wfa1IDEa.jpeg', alt: 'Close-up of black t-shirt inner fabric' },
+  { image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/black-white-u2rrzihNSDQGohefUrmbqIFg6WO9Y0.jpeg', alt: 'Folded black and white oversized t-shirts' },
 ]
 
 const customDesign = { name: 'Your Own Design', image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/custom-print-N3HkgXFQBRwSN3zd9Yfo2zJKv1thzl.jpg', alt: 'Black t-shirt with a custom design preview' }
@@ -22,6 +26,7 @@ const designOptions = [
 export default function Page() {
   const [isDark, setIsDark] = useState(false)
   const [mounted, setMounted] = useState(false)
+  const [selectedGalleryImage, setSelectedGalleryImage] = useState(0)
 
   useEffect(() => {
     const savedTheme = window.localStorage.getItem('theme')
@@ -51,19 +56,22 @@ export default function Page() {
       <main className="min-h-screen bg-stone-50 dark:bg-stone-950">
         <section className="mx-auto w-full max-w-6xl px-3 py-6 md:px-4 md:py-16">
           <div className="grid items-start gap-6 md:grid-cols-2 md:items-center md:gap-12">
-            <div className="flex flex-col gap-4">
-              {products.map((product, index) => <div key={product.name} className="relative aspect-square overflow-hidden rounded-lg bg-stone-100 dark:bg-stone-900"><Image src={product.image} alt={product.alt} fill priority={index === 0} className="object-cover" /></div>)}
+            <div className="grid grid-cols-[4.5rem_1fr] gap-3 md:sticky md:top-20">
+              <div className="flex flex-col gap-2">
+                {productGallery.map((product, index) => <button key={product.alt} type="button" onClick={() => setSelectedGalleryImage(index)} className={`relative aspect-square overflow-hidden rounded-md border-2 ${selectedGalleryImage === index ? 'border-stone-900 dark:border-stone-50' : 'border-transparent'}`} aria-label={`View ${product.alt}`}><Image src={product.image} alt="" fill sizes="72px" className="object-cover" /></button>)}
+              </div>
+              <div className="relative aspect-[4/5] overflow-hidden rounded-lg bg-stone-100 dark:bg-stone-900"><Image src={productGallery[selectedGalleryImage].image} alt={productGallery[selectedGalleryImage].alt} fill priority className="object-cover" sizes="(max-width: 768px) 80vw, 48vw" /></div>
             </div>
             <div className="flex flex-col gap-5 md:gap-8">
-              <div><h1 className="mb-1 text-3xl font-light text-stone-900 dark:text-stone-50 md:text-5xl">240 GSM Premium Oversized T-Shirt</h1><p className="text-base text-stone-600 dark:text-stone-400 md:text-lg">Premium comfort. Minimal design.</p></div>
-              <div><p className="mb-1 text-xs text-stone-500">Pricing</p><p className="text-sm font-medium text-stone-900 dark:text-stone-200">XXS – 3XL — <span className="text-lg md:text-2xl">₹300</span></p><p className="text-sm font-medium text-stone-900 dark:text-stone-200">Custom printed — <span className="text-lg md:text-2xl">₹350</span></p><p className="mt-1 text-xs text-stone-500">All prices are inclusive of delivery charges.</p></div>
+              <div><h1 className="mb-1 text-3xl font-light text-stone-900 dark:text-stone-50 md:text-5xl">Premium Oversized T-Shirt</h1><p className="text-base text-stone-600 dark:text-stone-400 md:text-lg">Premium comfort. Minimal design.</p></div>
+              <div><p className="mb-1 text-xs text-stone-500">Pricing</p><p className="text-sm font-medium text-stone-900 dark:text-stone-200">Plain tees — <span className="text-lg md:text-2xl">₹300</span></p><p className="text-sm font-medium text-stone-900 dark:text-stone-200">Custom printed — <span className="text-lg md:text-2xl">₹350</span></p><p className="mt-1 text-xs text-stone-500">Prices are excl. of delivery charges. Standard delivery charges: ₹50. Standard delivery price applies across India.</p></div>
               <div><p className="mb-2 text-xs text-stone-500">Colors available</p><div className="flex gap-2"><span className="inline-flex items-center gap-2 rounded-full border border-stone-300 px-3 py-1.5 text-xs text-stone-700 dark:border-stone-700 dark:text-stone-300"><span className="size-3 rounded-full border border-stone-400 bg-stone-950" />Black</span><span className="inline-flex items-center gap-2 rounded-full border border-stone-300 px-3 py-1.5 text-xs text-stone-700 dark:border-stone-700 dark:text-stone-300"><span className="size-3 rounded-full border border-stone-400 bg-white" />White</span></div></div>
               <div><p className="mb-2 text-xs text-stone-500">Sizes available</p><p className="text-sm text-stone-700 dark:text-stone-300">XXS, XS, S, M, L, XL, XXL and 3XL</p></div>
-              <div><p className="mb-2 text-xs text-stone-500">Fabric</p><ul className="flex flex-col gap-1 text-sm text-stone-700 dark:text-stone-300"><li>• 100% Cotton</li><li>• 240 GSM Premium French Terry</li><li>• Bio-washed</li><li>• Super Combed Ring-Spun Cotton</li><li>• Soft, breathable &amp; durable</li></ul></div>
-              <div><p className="mb-2 text-xs text-stone-500">Delivery</p><ul className="flex flex-col gap-1 text-sm text-stone-700 dark:text-stone-300"><li>• Delivered within 3 days</li><li>• Delivery included across Bangalore</li><li>• Cash on Delivery available</li></ul></div>
+              <div><p className="mb-2 text-xs text-stone-500">Fabric</p><ul className="flex flex-col gap-1 text-sm text-stone-700 dark:text-stone-300"><li>• 100% Cotton</li><li>• Premium French Terry</li><li>• Bio-washed</li><li>• Super Combed Ring-Spun Cotton</li><li>• Soft, breathable &amp; durable</li></ul></div>
+              <div><p className="mb-2 text-xs text-stone-500">Delivery</p><ul className="flex flex-col gap-1 text-sm text-stone-700 dark:text-stone-300"><li>• Delivered within 3 days</li><li>• Standard delivery charges apply</li><li>• Cash on Delivery available</li></ul></div>
               <div><p className="mb-2 text-xs text-stone-500">Returns</p><p className="text-sm text-stone-700 dark:text-stone-300">7-day returns for damaged, incorrect, or unused and unwashed items. Refunds are processed once the return is received.</p></div>
-              <p className="text-xs text-stone-500">Please check the size chart before ordering. Our oversized fit is designed to match luxury streetwear sizing.</p>
-              <a href="https://wa.me/916301725336?text=Hi!%20I%20want%20to%20order%20a%20240%20GSM%20Premium%20Oversized%20T-Shirt" target="_blank" rel="noreferrer" className="inline-flex w-fit rounded-lg bg-stone-900 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-stone-700 dark:bg-stone-50 dark:text-stone-950 dark:hover:bg-stone-200">Buy on WhatsApp</a>
+              <p className="rounded-lg border border-stone-300 bg-stone-100 px-4 py-3 text-sm font-medium leading-6 text-stone-900 dark:border-stone-700 dark:bg-stone-900 dark:text-stone-100">Please check the size chart before ordering. Our oversized fit is designed to match luxury streetwear sizing.</p>
+              <a href="https://wa.me/916301725336?text=Hi!%20I%20want%20to%20order%20a%20Premium%20Oversized%20T-Shirt" target="_blank" rel="noreferrer" className="inline-flex w-fit rounded-lg bg-stone-900 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-stone-700 dark:bg-stone-50 dark:text-stone-950 dark:hover:bg-stone-200">Buy on WhatsApp</a>
             </div>
           </div>
         </section>
@@ -74,14 +82,14 @@ export default function Page() {
             <h2 className="text-3xl font-light tracking-tight text-stone-950 dark:text-stone-50 md:text-4xl">Design your oversized tee</h2>
             <p className="mt-3 text-sm leading-6 text-stone-600 dark:text-stone-400">Choose one of our designs or your own custom design.</p>
           </div>
-          <div className="flex flex-col gap-8">
+          <div className="grid gap-6 md:grid-cols-2">
             <div>
               <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-stone-500">Custom design</p>
-              <div className="max-w-sm"><ProductCard {...customDesign} price={350} custom colorOptions={['Black', 'White']} placementOptions={['Front center', 'Back center', 'Left chest', 'Right chest']} /></div>
+              <div><ProductCard {...customDesign} price={350} custom colorOptions={['Black', 'White']} placementOptions={['Front center', 'Back center', 'Left chest', 'Right chest', 'Other']} /></div>
             </div>
             <div>
               <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-stone-500">Choose a design</p>
-              <div className="max-w-sm"><ProductCard {...designOptions[0]} price={350} designOptions={designOptions} colorOptions={['Black', 'White']} /></div>
+              <div><ProductCard {...designOptions[0]} price={350} designOptions={designOptions} colorOptions={['Black', 'White']} /></div>
             </div>
           </div>
         </section>

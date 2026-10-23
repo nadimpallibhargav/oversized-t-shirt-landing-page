@@ -26,6 +26,7 @@ export function ProductCard({ name, price, image, alt, colorOptions = ['Black', 
   const [uploading, setUploading] = useState(false)
   const [uploadError, setUploadError] = useState('')
   const [placement, setPlacement] = useState(placementOptions[0] ?? '')
+  const [otherPlacement, setOtherPlacement] = useState('')
 
   const uploadDesign = async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
@@ -48,7 +49,7 @@ export function ProductCard({ name, price, image, alt, colorOptions = ['Black', 
 
   const buyOnWhatsApp = () => {
     const designDetails = custom && uploadedDesignUrl ? ` Custom design image: ${uploadedDesignUrl}` : ''
-    const placementDetails = custom && placement ? ` Placement: ${placement}.` : ''
+    const placementDetails = custom && placement ? ` Placement: ${placement === 'Other' ? otherPlacement || 'Other' : placement}.` : ''
     const details = `Hi! I want to order ${quantity} x ${selectedDesign.name} (${size}, ${color}) for a total of ₹${price * quantity}.${placementDetails}${designDetails}`
     window.open(`https://wa.me/916301725336?text=${encodeURIComponent(details)}`, '_blank', 'noopener,noreferrer')
   }
@@ -59,7 +60,7 @@ export function ProductCard({ name, price, image, alt, colorOptions = ['Black', 
         <Image src={selectedDesign.image} alt={selectedDesign.alt} fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover transition duration-500 hover:scale-[1.03]" />
       </div>
       {designOptions.length > 0 && <div className="flex gap-2 overflow-x-auto p-3 pb-0">
-        {designOptions.map((design) => <button key={design.name} type="button" onClick={() => setSelectedDesign(design)} className={`flex w-16 shrink-0 flex-col gap-1 text-left ${selectedDesign.name === design.name ? 'opacity-100' : 'opacity-60 hover:opacity-100'}`} aria-label={`Select ${design.name}`}><span className={`relative aspect-square overflow-hidden rounded-md border-2 ${selectedDesign.name === design.name ? 'border-stone-900 dark:border-stone-50' : 'border-transparent'}`}><Image src={design.image} alt="" fill sizes="64px" className="object-cover" /></span><span className="truncate text-[10px] text-stone-700 dark:text-stone-300">{design.name}</span></button>)}
+        {designOptions.map((design) => <button key={design.name} type="button" onClick={() => setSelectedDesign(design)} className={`flex w-16 shrink-0 flex-col gap-1 text-left ${selectedDesign.name === design.name ? 'opacity-100' : 'opacity-60 hover:opacity-100'}`} aria-label={`Select ${design.name}`}><span className={`relative aspect-square overflow-hidden rounded-md border-2 ${selectedDesign.name === design.name ? 'border-stone-900 dark:border-stone-50' : 'border-transparent'}`}><Image src={design.image} alt="" fill sizes="64px" className="object-cover" /></span></button>)}
       </div>}
       <div className="flex flex-1 flex-col gap-4 p-4">
         <div className="flex items-start justify-between gap-3">
@@ -91,6 +92,7 @@ export function ProductCard({ name, price, image, alt, colorOptions = ['Black', 
         {custom && placementOptions.length > 0 && <div className="flex flex-col gap-1.5 text-xs">
           <label htmlFor={`placement-${name}`} className="text-stone-500">Print placement</label>
           <select id={`placement-${name}`} value={placement} onChange={(event) => setPlacement(event.target.value)} className="w-full rounded-md border border-stone-200 bg-white px-2 py-2 text-stone-900 dark:border-stone-700 dark:bg-stone-950 dark:text-stone-50">{placementOptions.map((option) => <option key={option}>{option}</option>)}</select>
+          {placement === 'Other' && <input value={otherPlacement} onChange={(event) => setOtherPlacement(event.target.value)} placeholder="Describe placement" aria-label="Describe other print placement" className="w-full rounded-md border border-stone-200 bg-white px-2 py-2 text-stone-900 placeholder:text-stone-400 dark:border-stone-700 dark:bg-stone-950 dark:text-stone-50" />}
         </div>}
         {custom && <div className="flex flex-col gap-1.5 text-xs">
           <label htmlFor={`design-${name}`} className="text-stone-500">Your custom design</label>
