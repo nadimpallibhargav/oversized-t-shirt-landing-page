@@ -13,11 +13,12 @@ type ProductCardProps = {
   custom?: boolean
   placementOptions?: string[]
   designOptions?: { name: string; image: string; alt: string }[]
+  compact?: boolean
 }
 
 const sizes = ['XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL', '3XL']
 
-export function ProductCard({ name, price, image, alt, colorOptions = ['Black', 'White'], custom = false, placementOptions = [], designOptions = [] }: ProductCardProps) {
+export function ProductCard({ name, price, image, alt, colorOptions = ['Black', 'White'], custom = false, placementOptions = [], designOptions = [], compact = false }: ProductCardProps) {
   const [selectedDesign, setSelectedDesign] = useState({ name, image, alt })
   const [size, setSize] = useState('M')
   const [color, setColor] = useState(colorOptions[0])
@@ -56,13 +57,13 @@ export function ProductCard({ name, price, image, alt, colorOptions = ['Black', 
 
   return (
     <article className="flex flex-col overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm dark:border-stone-800 dark:bg-stone-900">
-      <div className="relative aspect-[4/5] overflow-hidden bg-stone-100 dark:bg-stone-950">
+      {!compact && <div className="relative aspect-[4/5] overflow-hidden bg-stone-100 dark:bg-stone-950">
         <Image src={selectedDesign.image} alt={selectedDesign.alt} fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover transition duration-500 hover:scale-[1.03]" />
-      </div>
+      </div>}
       {designOptions.length > 0 && <div className="flex gap-2 overflow-x-auto p-3 pb-0">
         {designOptions.map((design) => <button key={design.name} type="button" onClick={() => setSelectedDesign(design)} className={`flex w-16 shrink-0 flex-col gap-1 text-left ${selectedDesign.name === design.name ? 'opacity-100' : 'opacity-60 hover:opacity-100'}`} aria-label={`Select ${design.name}`}><span className={`relative aspect-square overflow-hidden rounded-md border-2 ${selectedDesign.name === design.name ? 'border-stone-900 dark:border-stone-50' : 'border-transparent'}`}><Image src={design.image} alt="" fill sizes="64px" className="object-cover" /></span></button>)}
       </div>}
-      <div className="flex flex-1 flex-col gap-4 p-4">
+      <div className={`flex flex-1 flex-col gap-4 p-4 ${compact ? 'rounded-xl border border-stone-200 dark:border-stone-800' : ''}`}>
         <div className="flex items-start justify-between gap-3">
           <h3 className="text-sm font-medium text-stone-900 dark:text-stone-50">{selectedDesign.name}</h3>
           <p className="shrink-0 text-sm font-semibold text-stone-900 dark:text-stone-50">₹{price}</p>
