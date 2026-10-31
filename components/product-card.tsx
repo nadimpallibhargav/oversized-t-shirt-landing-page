@@ -14,12 +14,14 @@ type ProductCardProps = {
   placementOptions?: string[]
   designOptions?: { name: string; image: string; alt: string }[]
   compact?: boolean
+  showColor?: boolean
 }
 
 const sizes = ['XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL', '3XL']
 
-export function ProductCard({ name, price, image, alt, colorOptions = ['Black', 'White'], custom = false, placementOptions = [], designOptions = [], compact = false }: ProductCardProps) {
+export function ProductCard({ name, price, image, alt, colorOptions = ['Black', 'White'], custom = false, placementOptions = [], designOptions = [], compact = false, showColor = true }: ProductCardProps) {
   const [selectedDesign, setSelectedDesign] = useState({ name, image, alt })
+  const currentPrice = selectedDesign.name === 'Plain Tee' ? 300 : price
   const [size, setSize] = useState('M')
   const [color, setColor] = useState(colorOptions[0])
   const [quantity, setQuantity] = useState(1)
@@ -51,7 +53,7 @@ export function ProductCard({ name, price, image, alt, colorOptions = ['Black', 
   const buyOnWhatsApp = () => {
     const designDetails = custom && uploadedDesignUrl ? ` Custom design image: ${uploadedDesignUrl}` : ''
     const placementDetails = custom && placement ? ` Placement: ${placement === 'Other' ? otherPlacement || 'Other' : placement}.` : ''
-    const details = `Hi! I want to order ${quantity} x ${selectedDesign.name} (${size}, ${color}) for a total of ₹${price * quantity}.${placementDetails}${designDetails}`
+    const details = `Hi! I want to order ${quantity} x ${selectedDesign.name} (${size}, ${color}) for a total of ₹${currentPrice * quantity}.${placementDetails}${designDetails}`
     window.open(`https://wa.me/916301725336?text=${encodeURIComponent(details)}`, '_blank', 'noopener,noreferrer')
   }
 
@@ -66,21 +68,21 @@ export function ProductCard({ name, price, image, alt, colorOptions = ['Black', 
       <div className={`flex flex-1 flex-col gap-4 p-4 ${compact ? 'rounded-xl border border-stone-200 dark:border-stone-800' : ''}`}>
         <div className="flex items-start justify-between gap-3">
           <h3 className="text-sm font-medium text-stone-900 dark:text-stone-50">{selectedDesign.name}</h3>
-          <p className="shrink-0 text-sm font-semibold text-stone-900 dark:text-stone-50">₹{price}</p>
+          <p className="shrink-0 text-sm font-semibold text-stone-900 dark:text-stone-50">₹{currentPrice}</p>
         </div>
-        <div className="grid grid-cols-[1fr_1fr_auto] items-end gap-2 text-xs">
+        <div className={`grid ${showColor ? 'grid-cols-[1fr_1fr_auto]' : 'grid-cols-[1fr_auto]'} items-end gap-2 text-xs`}>
           <div>
             <p className="mb-1.5 text-stone-500">Size</p>
             <select value={size} onChange={(event) => setSize(event.target.value)} aria-label="Choose size" className="w-full rounded-md border border-stone-200 bg-white px-2 py-2 text-stone-900 outline-none transition focus:border-stone-500 dark:border-stone-700 dark:bg-stone-950 dark:text-stone-50">
               {sizes.map((option) => <option key={option} value={option}>{option}</option>)}
             </select>
           </div>
-          <div>
+          {showColor && <div>
             <p className="mb-1.5 text-stone-500">Color</p>
             <select value={color} onChange={(event) => setColor(event.target.value)} aria-label="Choose color" className="w-full rounded-md border border-stone-200 bg-white px-2 py-2 text-stone-900 outline-none transition focus:border-stone-500 dark:border-stone-700 dark:bg-stone-950 dark:text-stone-50">
               {colorOptions.map((option) => <option key={option} value={option}>{option}</option>)}
             </select>
-          </div>
+          </div>}
           <div>
             <p className="mb-1.5 text-stone-500">Qty</p>
             <div className="flex items-center rounded-md border border-stone-200 dark:border-stone-700">

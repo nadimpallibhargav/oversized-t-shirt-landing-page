@@ -18,6 +18,7 @@ const productGallery = [
 const customDesign = { name: 'Your Own Design', image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/custom-print-N3HkgXFQBRwSN3zd9Yfo2zJKv1thzl.jpg', alt: 'Black t-shirt with a custom design preview' }
 
 const designOptions = [
+  { name: 'Plain Tee', image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/white-SAU35CCXE1SPLVniic3kIZpcjdYPZB.jpeg', alt: 'Plain white oversized t-shirt' },
   { name: 'Spiderman Save Gwen', image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/spiderman-rQFmdkkCgX6RAu4xhdGH8GrHlfReAx.jpg', alt: 'Black t-shirt with a Spiderman Save Gwen design' },
   { name: 'Zen Balancing Stones', image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/balance-jky6yf2imDKm8CEDNH6etlgETNg5YE.jpg', alt: 'White t-shirt with a zen balancing stones design' },
   { name: 'Everest Base Camp', image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/everest-base-camp-zkg6UlhflXVMROvwzYHjV0Qhz8bxyc.jpg', alt: 'Navy t-shirt with an Everest Base Camp design' },
@@ -45,10 +46,10 @@ export default function Page() {
             </div>
             <div className="flex flex-col gap-5 md:gap-8">
               <div className="border-b border-stone-300 pb-4 dark:border-stone-700"><h1 className="text-3xl font-semibold leading-tight text-stone-900 dark:text-stone-50 md:text-4xl">Premium Oversized T-Shirt</h1><p className="mt-2 text-base text-stone-600 dark:text-stone-400">Premium comfort. Minimal design.</p></div>
-              <div className="border-b border-stone-300 pb-4 dark:border-stone-700"><p className="text-4xl font-medium text-stone-900 dark:text-stone-50">₹300</p><p className="mt-1 text-sm text-stone-600 dark:text-stone-400">Inclusive of all taxes</p></div>
+              <div className="border-b border-stone-300 pb-4 dark:border-stone-700"><p className="text-3xl font-medium text-stone-900 dark:text-stone-50">₹300 plain · ₹350 printed</p><p className="mt-1 text-sm text-stone-600 dark:text-stone-400">Inclusive of all taxes</p></div>
               <div className="grid grid-cols-3 gap-2 border-b border-stone-300 pb-4 text-center dark:border-stone-700"><div className="rounded-lg bg-stone-100 px-2 py-3 dark:bg-stone-900"><RotateCcw aria-hidden="true" className="mx-auto size-5" /><p className="mt-1 text-xs font-medium">7-day returns</p></div><div className="rounded-lg bg-stone-100 px-2 py-3 dark:bg-stone-900"><Banknote aria-hidden="true" className="mx-auto size-5" /><p className="mt-1 text-xs font-medium">Pay on delivery</p></div><div className="rounded-lg bg-stone-100 px-2 py-3 dark:bg-stone-900"><Truck aria-hidden="true" className="mx-auto size-5" /><p className="mt-1 text-xs font-medium">Standard delivery</p></div></div>
-              <ProductCard {...designOptions[0]} price={300} designOptions={designOptions} colorOptions={['Black', 'White']} compact />
-              <p className="text-xs text-stone-500">Plain tees ₹300 · Custom printed ₹350 · Delivery charges extra (standard ₹50 across India)</p>
+              <ProductCard {...designOptions[0]} price={350} designOptions={designOptions} colorOptions={['Black', 'White']} compact showColor={false} />
+              <p className="text-xs text-stone-500">Plain tees ₹300 · Printed tees ₹350 · Delivery charges extra (standard ₹50 across India)</p>
               <p className="text-sm font-semibold text-stone-900 dark:text-stone-50">Choose a design</p>
               <div className="hidden"><p className="mb-2 text-xs text-stone-500">Colors available</p><div className="flex gap-2"><span className="inline-flex items-center gap-2 rounded-full border border-stone-300 px-3 py-1.5 text-xs text-stone-700 dark:border-stone-700 dark:text-stone-300"><span className="size-3 rounded-full border border-stone-400 bg-stone-950" />Black</span><span className="inline-flex items-center gap-2 rounded-full border border-stone-300 px-3 py-1.5 text-xs text-stone-700 dark:border-stone-700 dark:text-stone-300"><span className="size-3 rounded-full border border-stone-400 bg-white" />White</span></div></div>
               <div><p className="mb-2 text-xs text-stone-500">Sizes available</p><p className="text-sm text-stone-700 dark:text-stone-300">XXS, XS, S, M, L, XL, XXL and 3XL</p></div>
