@@ -1,0 +1,128 @@
+'use client'
+
+import Image from 'next/image'
+import { Minus, Plus, Smartphone } from 'lucide-react'
+import { ChangeEvent, useState } from 'react'
+
+type ProductCardProps = {
+  name: string
+  price: number
+  image: string
+  alt: string
+  colorOptions?: string[]
+  custom?: boolean
+  placementOptions?: string[]
+  designOptions?: { name: string; image: string; alt: string }[]
+  compact?: boolean
+  showColor?: boolean
+  onDesignChange?: (design: { name: string; image: string; alt: string }) => void
+  designGroups?: { label: string; options: { name: string; image: string; alt: string }[] }[]
+  onColorChange?: (color: string) => void
+  showProductName?: boolean
+}
+
+const sizes = ['XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL', '3XL']
+
+export function ProductCard({ name, price, image, alt, colorOptions = ['Black', 'White'], custom = false, placementOptions = [], designOptions = [], compact = false, showColor = true, onDesignChange, designGroups = [], onColorChange, showProductName = false }: ProductCardProps) {
+  const [selectedDesign, setSelectedDesign] = useState({ name, image, alt })
+  const [selectedCategory, setSelectedCategory] = useState(designGroups[0]?.label ?? 'Designs')
+  const selectCategory = (label: string) => {
+    setSelectedCategory(label)
+    const firstOption = designGroups.find((group) => group.label === label)?.options[0]
+    if (firstOption) selectDesign(firstOption)
+  }
+
+  const selectDesign = (design: { name: string; image: string; alt: string }) => {
+    setSelectedDesign(design)
+    onDesignChange?.(design)
+  }
+  const currentPrice = selectedDesign.name === 'Plain Tee' ? 300 : price
+  const [size, setSize] = useState('M')
+  const [color, setColor] = useState(colorOptions[0])
+  const [quantity, setQuantity] = useState(1)
+  const [uploadedDesignUrl, setUploadedDesignUrl] = useState('')
+  const [uploading, setUploading] = useState(false)
+  const [uploadError, setUploadError] = useState('')
+  const [placement, setPlacement] = useState(placementOptions[0] ?? '')
+  const [otherPlacement, setOtherPlacement] = useState('')
+
+  const uploadDesign = async (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+    if (!file) return
+    setUploading(true)
+    setUploadError('')
+    const formData = new FormData()
+    formData.append('file', file)
+    try {
+      const response = await fetch('/api/upload', { method: 'POST', body: formData })
+      const result = await response.json()
+      if (!response.ok) throw new Error(result.error)
+      setUploadedDesignUrl(result.url)
+    } catch (error) {
+      setUploadError(error instanceof Error ? error.message : 'Upload failed.')
+    } finally {
+      setUploading(false)
+    }
+  }
+
+  const buyOnWhatsApp = () => {
+    const designDetails = custom && uploadedDesignUrl ? ` Custom design image: ${uploadedDesignUrl}` : ''
+    const placementDetails = custom && placement ? ` Placement: ${placement === 'Other' ? otherPlacement || 'Other' : placement}.` : ''
+    const details = `Hi! I want to order ${quantity} x ${selectedDesign.name} (${size}, ${color}) for a total of ₹${currentPrice * quantity}.${placementDetails}${designDetails}`
+    window.open(`https://wa.me/916301725336?text=${encodeURIComponent(details)}`, '_blank', 'noopener,noreferrer')
+  }
+
+  return (
+    <article className="flex flex-col overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm dark:border-stone-800 dark:bg-stone-900">
+      {!compact && <div className="relative aspect-[4/5] overflow-hidden bg-stone-100 dark:bg-stone-950">
+        <Image src={selectedDesign.image} alt={selectedDesign.alt} fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover transition duration-500 hover:scale-[1.03]" />
+      </div>}
+      {(designOptions.length > 0 || designGroups.length > 0) && <div className="flex flex-col gap-3 p-3 pb-0">
+        {designGroups.length > 0 && <div className="flex border-b border-stone-200 dark:border-stone-800">{designGroups.map((group) => <button key={group.label} type="button" onClick={() => selectCategory(group.label)} className={`rounded-md px-3 py-2 text-xs font-semibold uppercase tracking-[0.16em] transition ${selectedCategory === group.label ? 'bg-stone-900 text-white dark:bg-stone-50 dark:text-stone-950' : 'bg-stone-100 text-stone-500 hover:bg-stone-200 dark:bg-stone-800 dark:text-stone-300'}`}>{group.label}</button>)}</div>}
+        {(designGroups.length > 0 ? designGroups.filter((group) => group.label === selectedCategory) : [{ label: 'Designs', options: designOptions }]).map((group) => <div key={group.label}><div className="flex gap-2 overflow-x-auto">{group.options.map((design) => <button key={design.name} type="button" onClick={() => selectDesign(design)} className={`flex w-16 shrink-0 flex-col gap-1 text-left ${selectedDesign.name === design.name ? 'opacity-100' : 'opacity-60 hover:opacity-100'}`} aria-label={`Select ${design.name}`}><span className={`relative aspect-square overflow-hidden rounded-md border-2 ${selectedDesign.name === design.name ? 'border-stone-900 dark:border-stone-50' : 'border-transparent'}`}><Image src={design.image} alt="" fill sizes="64px" className="object-cover" /></span></button>)}</div></div>)}
+      </div>}
+      <div className={`flex flex-1 flex-col gap-4 p-4 ${compact ? 'rounded-xl border border-stone-200 dark:border-stone-800' : ''}`}>
+        <div className="flex items-start justify-between gap-3">
+          {showProductName ? <h3 className="text-sm font-medium text-stone-900 dark:text-stone-50">{selectedDesign.name}</h3> : <span />}
+          <span />
+        </div>
+        <div className={`grid ${showColor ? 'grid-cols-[1fr_1fr_auto]' : 'grid-cols-[1fr_auto]'} items-end gap-2 text-xs`}>
+          <div>
+            <p className="mb-1.5 text-stone-500">Size</p>
+            <select value={size} onChange={(event) => setSize(event.target.value)} aria-label="Choose size" className="w-full rounded-md border border-stone-200 bg-white px-2 py-2 text-stone-900 outline-none transition focus:border-stone-500 dark:border-stone-700 dark:bg-stone-950 dark:text-stone-50">
+              {sizes.map((option) => <option key={option} value={option}>{option}</option>)}
+            </select>
+          </div>
+          {showColor && <div>
+            <p className="mb-1.5 text-stone-500">Color</p>
+            <select value={color} onChange={(event) => { setColor(event.target.value); onColorChange?.(event.target.value) }} aria-label="Choose color" className="w-full rounded-md border border-stone-200 bg-white px-2 py-2 text-stone-900 outline-none transition focus:border-stone-500 dark:border-stone-700 dark:bg-stone-950 dark:text-stone-50">
+              {colorOptions.map((option) => <option key={option} value={option}>{option}</option>)}
+            </select>
+          </div>}
+          <div>
+            <p className="mb-1.5 text-stone-500">Qty</p>
+            <div className="flex items-center rounded-md border border-stone-200 dark:border-stone-700">
+              <button type="button" onClick={() => setQuantity(Math.max(1, quantity - 1))} className="p-2 text-stone-600 hover:text-stone-950 dark:text-stone-300 dark:hover:text-white" aria-label="Decrease quantity"><Minus className="size-3.5" /></button>
+              <span className="min-w-7 text-center font-medium text-stone-900 dark:text-stone-50">{quantity}</span>
+              <button type="button" onClick={() => setQuantity(Math.min(10, quantity + 1))} className="p-2 text-stone-600 hover:text-stone-950 dark:text-stone-300 dark:hover:text-white" aria-label="Increase quantity"><Plus className="size-3.5" /></button>
+            </div>
+          </div>
+        </div>
+        <p className="text-left text-2xl font-semibold text-stone-900 dark:text-stone-50">₹{currentPrice}</p>
+        {custom && placementOptions.length > 0 && <div className="flex flex-col gap-1.5 text-xs">
+          <label htmlFor={`placement-${name}`} className="text-stone-500">Print placement</label>
+          <select id={`placement-${name}`} value={placement} onChange={(event) => setPlacement(event.target.value)} className="w-full rounded-md border border-stone-200 bg-white px-2 py-2 text-stone-900 dark:border-stone-700 dark:bg-stone-950 dark:text-stone-50">{placementOptions.map((option) => <option key={option}>{option}</option>)}</select>
+          {placement === 'Other' && <input value={otherPlacement} onChange={(event) => setOtherPlacement(event.target.value)} placeholder="Describe placement" aria-label="Describe other print placement" className="w-full rounded-md border border-stone-200 bg-white px-2 py-2 text-stone-900 placeholder:text-stone-400 dark:border-stone-700 dark:bg-stone-950 dark:text-stone-50" />}
+        </div>}
+        {custom && <div className="flex flex-col gap-1.5 text-xs">
+          <label htmlFor={`design-${name}`} className="text-stone-500">Your custom design</label>
+          <input id={`design-${name}`} type="file" accept="image/jpeg,image/png,image/webp" onChange={uploadDesign} className="w-full rounded-md border border-dashed border-stone-300 bg-stone-50 px-2 py-2 text-stone-600 file:mr-2 file:rounded file:border-0 file:bg-stone-900 file:px-2 file:py-1 file:text-xs file:text-white dark:border-stone-700 dark:bg-stone-950 dark:text-stone-300 dark:file:bg-stone-50 dark:file:text-stone-950" />
+          {uploading && <p className="text-stone-500">Uploading design...</p>}
+          {uploadedDesignUrl && <p className="text-green-700 dark:text-green-400">Design uploaded and ready to send.</p>}
+          {uploadError && <p className="text-red-700 dark:text-red-400">{uploadError}</p>}
+        </div>}
+        <button type="button" onClick={buyOnWhatsApp} disabled={uploading} className="mt-auto flex w-full items-center justify-center gap-2 rounded-lg bg-stone-900 px-3 py-2.5 text-sm font-medium text-white transition hover:bg-stone-700 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-stone-50 dark:text-stone-950 dark:hover:bg-stone-200"><Smartphone className="size-4" />Buy now</button>
+      </div>
+    </article>
+  )
+}
