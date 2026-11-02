@@ -23,6 +23,7 @@ const sizes = ['XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL', '3XL']
 
 export function ProductCard({ name, price, image, alt, colorOptions = ['Black', 'White'], custom = false, placementOptions = [], designOptions = [], compact = false, showColor = true, onDesignChange, designGroups = [] }: ProductCardProps) {
   const [selectedDesign, setSelectedDesign] = useState({ name, image, alt })
+  const [selectedCategory, setSelectedCategory] = useState(designGroups[0]?.label ?? 'Designs')
   const selectDesign = (design: { name: string; image: string; alt: string }) => {
     setSelectedDesign(design)
     onDesignChange?.(design)
@@ -69,7 +70,8 @@ export function ProductCard({ name, price, image, alt, colorOptions = ['Black', 
         <Image src={selectedDesign.image} alt={selectedDesign.alt} fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover transition duration-500 hover:scale-[1.03]" />
       </div>}
       {(designOptions.length > 0 || designGroups.length > 0) && <div className="flex flex-col gap-3 p-3 pb-0">
-        {(designGroups.length > 0 ? designGroups : [{ label: 'Designs', options: designOptions }]).map((group) => <div key={group.label}><p className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-stone-500">{group.label}</p><div className="flex gap-2 overflow-x-auto">{group.options.map((design) => <button key={design.name} type="button" onClick={() => selectDesign(design)} className={`flex w-16 shrink-0 flex-col gap-1 text-left ${selectedDesign.name === design.name ? 'opacity-100' : 'opacity-60 hover:opacity-100'}`} aria-label={`Select ${design.name}`}><span className={`relative aspect-square overflow-hidden rounded-md border-2 ${selectedDesign.name === design.name ? 'border-stone-900 dark:border-stone-50' : 'border-transparent'}`}><Image src={design.image} alt="" fill sizes="64px" className="object-cover" /></span></button>)}</div></div>)}
+        {designGroups.length > 0 && <div className="flex border-b border-stone-200 dark:border-stone-800">{designGroups.map((group) => <button key={group.label} type="button" onClick={() => setSelectedCategory(group.label)} className={`border-b-2 px-3 py-2 text-xs font-semibold uppercase tracking-[0.16em] transition ${selectedCategory === group.label ? 'border-stone-900 text-stone-900 dark:border-stone-50 dark:text-stone-50' : 'border-transparent text-stone-500'}`}>{group.label}</button>)}</div>}
+        {(designGroups.length > 0 ? designGroups.filter((group) => group.label === selectedCategory) : [{ label: 'Designs', options: designOptions }]).map((group) => <div key={group.label}><div className="flex gap-2 overflow-x-auto">{group.options.map((design) => <button key={design.name} type="button" onClick={() => selectDesign(design)} className={`flex w-16 shrink-0 flex-col gap-1 text-left ${selectedDesign.name === design.name ? 'opacity-100' : 'opacity-60 hover:opacity-100'}`} aria-label={`Select ${design.name}`}><span className={`relative aspect-square overflow-hidden rounded-md border-2 ${selectedDesign.name === design.name ? 'border-stone-900 dark:border-stone-50' : 'border-transparent'}`}><Image src={design.image} alt="" fill sizes="64px" className="object-cover" /></span></button>)}</div></div>)}
       </div>}
       <div className={`flex flex-1 flex-col gap-4 p-4 ${compact ? 'rounded-xl border border-stone-200 dark:border-stone-800' : ''}`}>
         <div className="flex items-start justify-between gap-3">
