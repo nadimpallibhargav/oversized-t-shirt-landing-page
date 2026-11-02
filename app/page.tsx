@@ -42,11 +42,18 @@ export default function Page() {
     setPreviewImage(plainImage.image)
   }
 
+  const previewItems = [selectedTopDesign, productGallery[2], productGallery[4], productGallery[6]]
+  const selectPreview = (index: number) => {
+    const item = previewItems[index]
+    setSelectedGalleryImage(index)
+    setPreviewImage(item.image)
+  }
+
   return (
     <>
       <div className="sticky top-0 z-50 flex min-h-12 items-center justify-between gap-2 bg-stone-900 px-3 py-2 text-stone-50">
-        <p className="text-xs md:text-sm">Currently selling oversized t-shirts <span className="text-stone-400">· DM us what we&apos;re missing</span></p>
-        <a href="#custom-design" className="rounded-lg px-2 py-1 text-xs font-medium text-stone-50 underline-offset-4 hover:underline">Custom design</a>
+        <p className="min-w-0 flex-1 text-xs md:text-sm">DM us what we&apos;re missing</p>
+        <a href="#custom-design" className="shrink-0 whitespace-nowrap rounded-lg bg-stone-50 px-3 py-2 text-xs font-semibold text-stone-950 transition hover:bg-stone-200">Custom Design</a>
       </div>
 
       <main className="min-h-screen bg-stone-50 dark:bg-stone-950">
@@ -54,12 +61,12 @@ export default function Page() {
           <div className="grid items-start gap-6 md:grid-cols-2 md:gap-12">
             <div className="grid grid-cols-1 gap-3 md:sticky md:top-20 md:grid-cols-[4.5rem_1fr]">
               <div className="order-2 flex flex-row gap-2 overflow-x-auto md:order-1 md:flex-col">
-                {[selectedTopDesign, productGallery[2], productGallery[4], productGallery[6]].map((product, index) => <button key={product.alt} type="button" onClick={() => { setSelectedGalleryImage(index); setPreviewImage(product.image) }} className={`relative aspect-square overflow-hidden rounded-md border-2 ${previewImage === product.image ? 'border-stone-900 dark:border-stone-50' : 'border-transparent'}`} aria-label={`View ${product.alt}`}><Image src={product.image} alt="" fill sizes="72px" className="object-cover" /></button>)}
+                {previewItems.map((product, index) => <button key={product.alt} type="button" onClick={() => selectPreview(index)} className={`relative aspect-square size-16 shrink-0 overflow-hidden rounded-md border-2 ${previewImage === product.image ? 'border-stone-900 dark:border-stone-50' : 'border-transparent'}`} aria-label={`View ${product.alt}`}><Image src={product.image} alt="" fill sizes="64px" className="object-cover" /></button>)}
               </div>
-              <div className="relative order-1 aspect-square min-w-0 overflow-hidden rounded-lg bg-stone-100 p-1 dark:bg-stone-900 md:order-2 md:aspect-[4/5]"><Image src={previewImage} alt={selectedTopDesign.alt || productGallery[selectedGalleryImage].alt} fill priority className="object-contain" sizes="(max-width: 768px) 92vw, 48vw" /></div>
+              <div className="group relative order-1 aspect-square min-w-0 overflow-hidden rounded-lg bg-stone-100 p-1 dark:bg-stone-900 md:order-2 md:aspect-[4/5]"><Image src={previewImage} alt={selectedTopDesign.alt || productGallery[selectedGalleryImage].alt} fill priority className="object-contain" sizes="(max-width: 768px) 92vw, 48vw" /><button type="button" onClick={() => selectPreview((selectedGalleryImage - 1 + previewItems.length) % previewItems.length)} aria-label="Previous product image" className="absolute left-2 top-1/2 inline-flex size-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-xl text-stone-900 shadow-md transition hover:bg-white"><span aria-hidden="true">‹</span></button><button type="button" onClick={() => selectPreview((selectedGalleryImage + 1) % previewItems.length)} aria-label="Next product image" className="absolute right-2 top-1/2 inline-flex size-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-xl text-stone-900 shadow-md transition hover:bg-white"><span aria-hidden="true">›</span></button><div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 gap-2 rounded-full bg-black/45 px-3 py-2">{previewItems.map((item, index) => <button key={item.alt} type="button" onClick={() => selectPreview(index)} aria-label={`Go to image ${index + 1}`} className={`size-3 rounded-full border border-white/80 transition ${selectedGalleryImage === index ? 'bg-white' : 'bg-white/40 hover:bg-white/80'}`} />)}</div></div>
             </div>
             <div className="flex flex-col gap-5 md:gap-8">
-              <div className="border-b border-stone-300 pb-4 dark:border-stone-700"><h1 className="text-[clamp(1.75rem,8vw,2.25rem)] font-semibold leading-tight text-stone-900 dark:text-stone-50 md:text-4xl">Premium Oversized T-Shirt</h1><p className="mt-2 text-base text-stone-600 dark:text-stone-400">Premium comfort. Minimal design.</p></div>
+              <div className="border-b border-stone-300 pb-4 dark:border-stone-700"><h1 className="text-2xl font-semibold leading-tight text-stone-900 dark:text-stone-50 md:text-4xl">Premium Oversized <span className="whitespace-nowrap">T-Shirt</span></h1><p className="mt-2 text-base text-stone-600 dark:text-stone-400">Premium comfort. Minimal design.</p></div>
               <div className="border-b border-stone-300 pb-4 dark:border-stone-700"><p className="text-4xl font-medium text-stone-900 dark:text-stone-50">₹{selectedTopDesign.name === 'Plain Tee' ? 300 : 350}</p><p className="mt-1 text-sm text-stone-600 dark:text-stone-400">Inclusive of all taxes</p></div>
               <div className="grid grid-cols-3 gap-2 border-b border-stone-300 pb-4 text-center dark:border-stone-700"><div className="rounded-lg bg-stone-100 px-2 py-3 dark:bg-stone-900"><RotateCcw aria-hidden="true" className="mx-auto size-5" /><p className="mt-1 text-xs font-medium">7-day returns</p></div><div className="rounded-lg bg-stone-100 px-2 py-3 dark:bg-stone-900"><Banknote aria-hidden="true" className="mx-auto size-5" /><p className="mt-1 text-xs font-medium">Pay on delivery</p></div><div className="rounded-lg bg-stone-100 px-2 py-3 dark:bg-stone-900"><Truck aria-hidden="true" className="mx-auto size-5" /><p className="mt-1 text-xs font-medium">Standard delivery</p></div></div>
               <ProductCard {...designOptions[0]} price={350} designGroups={[{ label: 'Plain', options: plainOptions }, { label: 'Printed', options: printedOptions }]} colorOptions={['Black', 'White']} compact showColor={selectedTopDesign.name === 'Plain Tee'} onDesignChange={handleDesignChange} onColorChange={handlePlainColorChange} />
