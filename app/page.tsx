@@ -37,6 +37,11 @@ export default function Page() {
     setPreviewImage(design.image)
   }
 
+  const handlePlainColorChange = (color: string) => {
+    const plainImage = color === 'White' ? productGallery[0] : productGallery[1]
+    setPreviewImage(plainImage.image)
+  }
+
   return (
     <>
       <div className="sticky top-0 z-50 flex min-h-12 items-center justify-between gap-2 bg-stone-900 px-3 py-2 text-stone-50">
@@ -57,7 +62,7 @@ export default function Page() {
               <div className="border-b border-stone-300 pb-4 dark:border-stone-700"><h1 className="text-3xl font-semibold leading-tight text-stone-900 dark:text-stone-50 md:text-4xl">Premium Oversized T-Shirt</h1><p className="mt-2 text-base text-stone-600 dark:text-stone-400">Premium comfort. Minimal design.</p></div>
               <div className="border-b border-stone-300 pb-4 dark:border-stone-700"><p className="text-4xl font-medium text-stone-900 dark:text-stone-50">₹{selectedTopDesign.name === 'Plain Tee' ? 300 : 350}</p><p className="mt-1 text-sm text-stone-600 dark:text-stone-400">Inclusive of all taxes</p></div>
               <div className="grid grid-cols-3 gap-2 border-b border-stone-300 pb-4 text-center dark:border-stone-700"><div className="rounded-lg bg-stone-100 px-2 py-3 dark:bg-stone-900"><RotateCcw aria-hidden="true" className="mx-auto size-5" /><p className="mt-1 text-xs font-medium">7-day returns</p></div><div className="rounded-lg bg-stone-100 px-2 py-3 dark:bg-stone-900"><Banknote aria-hidden="true" className="mx-auto size-5" /><p className="mt-1 text-xs font-medium">Pay on delivery</p></div><div className="rounded-lg bg-stone-100 px-2 py-3 dark:bg-stone-900"><Truck aria-hidden="true" className="mx-auto size-5" /><p className="mt-1 text-xs font-medium">Standard delivery</p></div></div>
-              <ProductCard {...designOptions[0]} price={350} designGroups={[{ label: 'Plain', options: plainOptions }, { label: 'Printed', options: printedOptions }]} colorOptions={['Black', 'White']} compact showColor={selectedTopDesign.name === 'Plain Tee'} onDesignChange={handleDesignChange} />
+              <ProductCard {...designOptions[0]} price={350} designGroups={[{ label: 'Plain', options: plainOptions }, { label: 'Printed', options: printedOptions }]} colorOptions={['Black', 'White']} compact showColor={selectedTopDesign.name === 'Plain Tee'} onDesignChange={handleDesignChange} onColorChange={handlePlainColorChange} />
               <div className="hidden"><p className="mb-2 text-xs text-stone-500">Colors available</p><div className="flex gap-2"><span className="inline-flex items-center gap-2 rounded-full border border-stone-300 px-3 py-1.5 text-xs text-stone-700 dark:border-stone-700 dark:text-stone-300"><span className="size-3 rounded-full border border-stone-400 bg-stone-950" />Black</span><span className="inline-flex items-center gap-2 rounded-full border border-stone-300 px-3 py-1.5 text-xs text-stone-700 dark:border-stone-700 dark:text-stone-300"><span className="size-3 rounded-full border border-stone-400 bg-white" />White</span></div>              </div>
               <div><p className="mb-2 text-xs text-stone-500">Fabric</p><ul className="flex flex-col gap-1 text-sm text-stone-700 dark:text-stone-300"><li>• 100% Cotton</li><li>• Premium French Terry</li><li>• Bio-washed</li><li>• Super Combed Ring-Spun Cotton</li><li>• Soft, breathable &amp; durable</li></ul></div>
               <div className="grid gap-3 sm:grid-cols-2"><div className="rounded-xl border border-stone-200 bg-white p-4 dark:border-stone-800 dark:bg-stone-900"><p className="mb-2 text-sm font-semibold text-stone-900 dark:text-stone-50">Delivery</p><p className="text-sm leading-6 text-stone-600 dark:text-stone-300">Delivered within 3 days. Standard delivery charges apply. Cash on Delivery available.</p></div><div className="rounded-xl border border-stone-200 bg-white p-4 dark:border-stone-800 dark:bg-stone-900"><p className="mb-2 text-sm font-semibold text-stone-900 dark:text-stone-50">Returns</p><p className="text-sm leading-6 text-stone-600 dark:text-stone-300">7-day returns for damaged, incorrect, or unused and unwashed items.</p></div></div>
