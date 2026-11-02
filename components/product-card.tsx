@@ -84,7 +84,7 @@ export function ProductCard({ name, price, image, alt, colorOptions = ['Black', 
       <div className={`flex flex-1 flex-col gap-4 p-4 ${compact ? 'rounded-xl border border-stone-200 dark:border-stone-800' : ''}`}>
         <div className="flex items-start justify-between gap-3">
           {showProductName ? <h3 className="text-sm font-medium text-stone-900 dark:text-stone-50">{selectedDesign.name}</h3> : <span />}
-          <p className="shrink-0 text-sm font-semibold text-stone-900 dark:text-stone-50">₹{currentPrice}</p>
+          <span />
         </div>
         <div className={`grid ${showColor ? 'grid-cols-[1fr_1fr_auto]' : 'grid-cols-[1fr_auto]'} items-end gap-2 text-xs`}>
           <div>
@@ -108,6 +108,7 @@ export function ProductCard({ name, price, image, alt, colorOptions = ['Black', 
             </div>
           </div>
         </div>
+        <p className="text-left text-2xl font-semibold text-stone-900 dark:text-stone-50">₹{currentPrice}</p>
         {custom && placementOptions.length > 0 && <div className="flex flex-col gap-1.5 text-xs">
           <label htmlFor={`placement-${name}`} className="text-stone-500">Print placement</label>
           <select id={`placement-${name}`} value={placement} onChange={(event) => setPlacement(event.target.value)} className="w-full rounded-md border border-stone-200 bg-white px-2 py-2 text-stone-900 dark:border-stone-700 dark:bg-stone-950 dark:text-stone-50">{placementOptions.map((option) => <option key={option}>{option}</option>)}</select>
